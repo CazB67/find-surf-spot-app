@@ -1,7 +1,7 @@
 .background-image-nav {
-    background-image: url("surf.jpeg");
+    background-image: url("./images/surf.jpeg");
 }
 
 .background-image-callout {
-    background-image: url("sand.jpeg");
+    background-image: url("./images/sand.jpeg");
 }
