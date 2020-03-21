@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
+    
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+    <link rel="stylesheet" href="style.css"/>
 
     <title>Find Surf Spot</title>
   </head>
@@ -13,9 +14,9 @@
   <body>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="script.js"></script>
+    
     <!-- Start Top Bar -->
-    <div class="top-bar">
+    <div class="top-bar background-image-nav">
       <div class="top-bar-left">
         <ul class="menu">
           <li class="menu-text">Yeti Agency</li>
@@ -34,136 +35,130 @@
     </div>
     <!-- End Top Bar -->
 
+     <!--Start Jumbotron -->
     <div class="callout large">
       <div class="row column text-center">
         <h1>Find Surf Spot</h1>
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
+        <blockquote>
+          The best surfer out there is the one having the most fun.
+            <cite>Phil Edwards</cite>
+          </blockquote>
+          
       </div>
     </div>
+     <!-- End Jumbotron -->
+
+     <!-- Start form and input information on left hand side -->
 
     <div class="row">
-      
-    
       <div class="medium-4 columns">
-        <h2>Search Surf Spots</h2>
-        <form>
-          <div class="grid-container">
+        <h3>Search Surf Spots</h3>
+          <form>
+            <div class="grid-container">
             <div class="grid-x grid-padding-x">
-              <div class="medium-12 cell">
-                <label>Post Code
-                  <input type="number" placeholder="6000">
-                </label>
-                <label>Select Menu
-                  <select>
-                    <option value="husker">Husker</option>
-                    <option value="starbuck">Starbuck</option>
-                    <option value="hotdog">Hot Dog</option>
-                    <option value="apollo">Apollo</option>
-                  </select>
-                </label>
-                <label>Select Menu
-                  <select>
-                    <option value="husker">Husker</option>
-                    <option value="starbuck">Starbuck</option>
-                    <option value="hotdog">Hot Dog</option>
-                    <option value="apollo">Apollo</option>
-                  </select>
-                </label>
-                <label>Select Menu
-                  <select>
-                    <option value="husker">Husker</option>
-                    <option value="starbuck">Starbuck</option>
-                    <option value="hotdog">Hot Dog</option>
-                    <option value="apollo">Apollo</option>
-                  </select>
-                </label>
-              </div>
+            <div class="medium-12 cell">
+              <label>Post Code
+                <input type="number" placeholder="6000">
+              </label>
+
+              <label>Ability
+                <select>
+                  <option value="husker">Beginner</option>
+                  <option value="starbuck">Medium</option>
+                  <option value="hotdog">Advanced</option>
+                </select>
+              </label>
+
+              <label>When do you want to surf?
+                <select>
+                  <option value="Today AM">Today AM</option>
+                  <option value="starbuck">Today PM</option>
+                  <option value="hotdog">Tomorrow</option>
+                   <option value="apollo">Apollo</option>
+                </select>
+              </label>
+              
+              <label>How far are you willing to travel?
+                <select>
+                  <option value="husker">Husker</option>
+                  <option value="starbuck">Starbuck</option>
+                  <option value="hotdog">Hot Dog</option>
+                  <option value="apollo">Apollo</option>
+                </select>
+              </label>
             </div>
-          </div>
-        </form>
-        
+            </div>
+            </div>
+          </form>
       </div>
-      <div class="medium-8 columns">
-        <img class="thumbnail" src="https://placehold.it/750x550">
+      <!-- End of form and input information on left hand side -->
+
+    <!-- Start of results info on right hand side -->
+    <div class="medium-8 columns">
+      <div class="row columns">
+        <div class="medium-12 large-12 columns">
+          <h3>Results</h3>
         </div>
+      </div>
+
+      <!-- Start of images holding results -->
+      <div class="row small-up-2 medium-up-3 large-up-3">
+        <div class="column column-block">
+          <img src="https://placehold.it/600x600" class="thumbnail" alt="">
+        </div>
+        <div class="column column-block">
+          <img src="https://placehold.it/600x600" class="thumbnail" alt="">
+        </div>
+        <div class="column column-block">
+          <img src="https://placehold.it/600x600" class="thumbnail" alt="">
+        </div>
+        <div class="column column-block">
+          <img src="https://placehold.it/600x600" class="thumbnail" alt="">
+        </div>
+        <div class="column column-block">
+          <img src="https://placehold.it/600x600" class="thumbnail" alt="">
+        </div>
+        <div class="column column-block">
+          <img src="https://placehold.it/600x600" class="thumbnail" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- End of results info on right hand side -->
+
+    <!-- Start of beach info -->
+    <hr>
+    <div class="row">
+      <div class="medium-12 columns">
+    <div class="row">
+      <div class="medium-8 columns">
+        <h3>Scarborough Beach</h3>
+        <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna.</p>
+      </div>
+      
+      <!-- Google map for particular beach -->
+      <div class="medium-4 columns">
+        <img src="https://placehold.it/600x600" class="thumbnail" alt="">
+      </div>
+    </div>
+    </div>
+  </div>
+
+    <hr>
+
+    <!-- Blockquote -->
+    <div class="row">
+      <div class="medium-12 columns align-center-middle">
+        <blockquote>
+          If you're having a bad day, catch a wave.
+          <cite>Frosty Hesson</cite>
+        </blockquote>
+      </div>
+        <hr>
     </div>
     
 
-    <div class="row">
-      <div class="medium-4 columns">
-        <h3>Photoshop</h3>
-        <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna.</p>
-      </div>
-      <div class="medium-4 columns">
-        <h3>Javascript</h3>
-        <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna.</p>
-      </div>
-      <div class="medium-4 columns">
-        <h3>Marketing</h3>
-        <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna.</p>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row column">
-      <ul class="vertical medium-horizontal menu expanded text-center">
-        <li><a href="#"><div class="stat">28</div><span>Websites</span></a></li>
-        <li><a href="#"><div class="stat">43</div><span>Apps</span></a></li>
-        <li><a href="#"><div class="stat">95</div><span>Ads</span></a></li>
-        <li><a href="#"><div class="stat">59</div><span>Cakes</span></a></li>
-        <li><a href="#"><div class="stat">18</div><span>Logos</span></a></li>
-      </ul>
-    </div>
-
-    <hr>
-
-    <div class="row column">
-      <h3>Our Recent Work</h3>
-    </div>
-
-    <div class="row medium-up-3 large-up-4">
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/550x550">
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row column">
+    <div class="row column background-image-nav">
       <ul class="menu">
         <li><a href="#">One</a></li>
         <li><a href="#">Two</a></li>
@@ -171,7 +166,6 @@
         <li><a href="#">Four</a></li>
       </ul>
     </div>
-    
     
   </body>
 </html>

@@ -1,18 +1,7 @@
-#beach-image h1 {
-    display: table;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
+.background-image-nav {
+    background-image: url("surf.jpeg");
 }
-#beach-image a {
-    display: table-cell;
-    vertical-align: middle;
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
-#beach-image a img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
+
+.background-image-callout {
+    background-image: url("sand.jpeg");
 }
