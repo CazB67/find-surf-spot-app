@@ -5,46 +5,55 @@ Swell
 Swell Direction 
 Tide 
 
-
-WInter Surfspots data Break down 
-
-Challenges 
-- how to use live api data to create conditional statments 
-- 
+Un-Surfable Wind Directions 
+- wind Directions: SW, S or W, NW above 15knots 
+- swell < 1.5m 
 
 Small Swell 
 
    Scaborough 
-
-   Wind : E, SE
-   windStrength < 10kn
+   Wind Direction
+   - Optimal wind direction = SE, E
+   - Optimal wind strength = < 11knots
    Swell: > 1.7m < 2.3m
-   Tide : low, mid 
+   - minimum swell required = 1.7m 
+   - max surfable swell = 2.4m 
+   - Swell direction = W, SW, N
+   Tide low Tide 
+   - 5hrs after low tide.
    Diffuclty: Beginner 
 
    Trigg Point 
-
-   Wind Direction : E, SE
-   Wind Strength: < 10kn
-   Swell > 1m < 3m
-   Swell Direction: W, SW, N
-   Tide: Low, Mid
+   Wind Direction ;
+   - Optimal wind direction = SE, E 
+   - Optimal wind strength = < 12knots 
+  Swell 
+   - minimal swell required = > 1m 
+   - max surfable swell = < 2.5m
+Swell Direction: W, SW, N
+   Tide: 
+   - 4hrs after low tide.
    Difficulty: Intermediate  
 
    Cottesloe Reef 
-
-    Wind : E, SE
-    windStrength < 10kn 
-    Swell: > 1.5m < 2.5m
-    swell Direction, W, SW, N
-    Tide : low, mid 
+   Wind Direction 
+   - Optimal wind direction = SE, E
+   - Optimal wind strength = < 15knots
+    Swell: 
+    - minimal swell required = > 1.5m   
+    - max swell required = < 2.5m
+    - swell direction, W, SW, N
+    Tide: 5 hrs after low tide 
     Difficulty: Beginner 
 
     Secret Harbour 
 
     Wind Direction: E, SE
-    Wind Strength: < 15 kn
-    Swell: > 1.8m < 2.3
+    - Optimal wind direction = SE, E 
+    - Optimal wind strength = < 10knts
+      Wind Strength: < 15 kn
+      Swell: > 1.8m < 2.3
+
     Swell Direction: S, SW, N
     Tide: All tides
     Difficulty: Intermediate  
