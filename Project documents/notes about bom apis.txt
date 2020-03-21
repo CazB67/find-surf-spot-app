@@ -1,0 +1,67 @@
+Latest Coastal Weather observations:
+IDW60700
+
+Lancelin: IDW60701.95606
+Jurien Bay: IDW60701.95606
+Ocean Reef: IDW60701.94607
+Hillaries Boat Harbour: IDW60701.95605
+Swanbourne: IDW60701.94614
+Rottnest Island: IDW60701.94602
+Colpoys Point: IDW60701.99255
+Garden Island: IDW60701.95607
+Mandurah: IDW60701.94605
+
+Wind across Australia: 
+IDCJCM0021
+
+Swanbourne, Rottnest,Scarborough Forecast data: IDW14199 and IDW12300
+Mandurah forecast data: IDW14114
+
+7-day Forecast options: (UDW14199)
+
+<forecast-period index="1" start-time-local="2020-03-20T00:00:00+08:00" end-time-local="2020-03-21T00:00:00+08:00" start-time-utc="2020-03-19T16:00:00Z" end-time-utc="2020-03-20T16:00:00Z">
+               <element type="forecast_icon_code">3</element>
+                <element type="air_temperature_minimum" units="Celsius">17</element>
+                <element type="air_temperature_maximum" units="Celsius">31</element>
+                <text type="precis">Mostly sunny.</text>
+                <text type="probability_of_precipitation">5%</text>
+
+
+Yanchep aac="WA_PT261"
+Perth aac="WA_PT053"
+Joondalup aac="WA_PT030"
+Scarborough aac="WA_PT058"
+Fremantle aac="WA_PT028"
+Rockingham aac="WA_PT055"
+Swanbourne aac="WA_PT060"
+Rottnest Island aac="WA_PT057"
+Mandurah aac="WA_PT012"
+Lancelin aac="WA_PT118"
+
+Marine Wind Warning Summary: IDW20100
+
+
+
+Coastal waters forecast for SW Waters: 3 day forecast
+IDW11160
+Parent=WA_FA001
+
+Lancelin Coast: Jurien Bay to Two Rocks, aac=WA_MW008
+Perth Coast: Two Rocks to Dawesville, aac=WA_MW009
+
+fields:
+
+forecast-period index:[0,1,2] start-time-local: end-time-local:
+opt warning-summary, type="marine_forecast"
+text type="forecast_winds"
+text type="forecast_seas"
+text type="forecast_swell1"
+test type="forecast_weather"
+
+
+TIDAL INFO:
+Request URL: http://www.bom.gov.au/australia/tides/scripts/getTidesTable.php?type=tide&aac=WA_TP091&date=19-03-2020&days=7&region=WA&offset=0&offsetName=&tz=Australia%2FPerth&tz_js=AWST
+
+Lancelin - WA_TP094
+Mandurah - WA_TP091
+Rottnest Island - WA_TP092
