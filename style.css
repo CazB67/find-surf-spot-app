@@ -1,7 +1,55 @@
 .background-image-nav {
-    background-image: url("./images/surf.jpeg");
+    background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
+    height: 3em;
 }
 
-.background-image-callout {
-    background-image: url("./images/sand.jpeg");
+.card {
+    background-color: #ffffff;
 }
+
+.container {
+    font-family: 'Kalam', cursive;
+}
+
+ 
+
+h1, h3, h4 {
+    font-family: 'Rock Salt', cursive;
+}
+
+.background-image {
+    
+    background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
+    color: #ffffff;
+}
+
+#footer{
+    height: 60px;
+    bottom: 0px;
+    left: 0px;
+    line-height: 50px;
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+    background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
+}
+
+.translucent-form-overlay {
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(54, 54, 54, 0.8);
+    padding: 20px;
+    color: #fefefe;
+  }
+  
+  .translucent-form-overlay label {
+    color: #fefefe;
+  }
+
+  .form {
+      padding-bottom: 10px;
+  }
+  
+  
+  
+  
