@@ -1,18 +1,14 @@
+# Surf Data 
 
-Wind Direction 
-Wind Strength 
-Swell 
-Swell Direction 
-Tide 
-
+# Unsurfable Conditions 
 Un-Surfable Wind Directions 
 - wind Directions: SW, S or W, NW above 15knots 
 - swell < 1.5m 
 
-Small Swell 
+# Places to surf when the swell is small  
 
    Scaborough 
-   Wind Direction
+   Wind 
    - Optimal wind direction = SE, E
    - Optimal wind strength = < 11knots
    Swell: > 1.7m < 2.3m
@@ -24,19 +20,19 @@ Small Swell
    Diffuclty: Beginner 
 
    Trigg Point 
-   Wind Direction ;
+   Wind 
    - Optimal wind direction = SE, E 
    - Optimal wind strength = < 12knots 
-  Swell 
+   Swell 
    - minimal swell required = > 1m 
    - max surfable swell = < 2.5m
-Swell Direction: W, SW, N
+   Swell Direction: W, SW, N
    Tide: 
    - 4hrs after low tide.
    Difficulty: Intermediate  
 
    Cottesloe Reef 
-   Wind Direction 
+   Wind  
    - Optimal wind direction = SE, E
    - Optimal wind strength = < 15knots
     Swell: 
@@ -47,84 +43,96 @@ Swell Direction: W, SW, N
     Difficulty: Beginner 
 
     Secret Harbour 
-
-    Wind Direction: E, SE
+    Wind 
     - Optimal wind direction = SE, E 
     - Optimal wind strength = < 10knts
-      Wind Strength: < 15 kn
-      Swell: > 1.8m < 2.3
-
+    Swell:
+   - minimum swell required > 1.8m 
+   - max swell required < 2.2m
     Swell Direction: S, SW, N
     Tide: All tides
     Difficulty: Intermediate  
 
     Lancelin (Back Beach)
-
-    Wind Direction E, SE
-    Wind Strength > 12kn
-    Swell > 1.6m < 2M
+    Wind
+   - Optimal wind direction = SE, E 
+   - Optimal wind strength = < 10knts
+    Swell 
+    - Minimum Swell Required > 1.6m 
+    - Maximum Swell < 2M
     Swell Direction: S, SW, N
     Tide: All tides 
     Difficutly: Beginner 
 
-    Alcomos 
-    Wind Direction E, SE
-    Wind Strength > 12kn
-    Swell > 1.6m < 2m
+    Alkimos
+    Wind
+    - Optimal wind direction = SE, E 
+    - Optimal wind strength = < 10knts
+    Swell 
+    - Minimum Swell Required > 1.6m 
+    - Maximum Sweel required < 2m
     Swell Direction: S, SW, N
-    Tide: Mid 
+    Tide: 7hrs after low tide 
     Difficulty; Advanced 
 
-    Mettams 
-
-    Wind Direction E, SE
-    Wind Strength > 12kn
-    Swell > 1.8m < 2.3m
+    Mettams (Trigg on willyweather )
+    Wind 
+    - Optimal wind direction = SE, E 
+    - Optimal wind strength = < 10knts
+   Swell
+    Minimum Swell Required > 1.8m 
+    Maximum Swell < 2.6m
     Swell Direction: S, SW, N
-    Tide: Mid, high
+    Tide: 5hrs after hours 
     Difficulty; intermediate 
 
-Big Swell 
+ # where surf when the swell is big  
 
    Rottnest Island (Stricklands-Bay)
-   Wind Driecton: N or NE
-   Wind Strength: <10kn
-   Swell: > 2m < 4m
-   Tide: low, mid, high 
+   Wind
+   - Optimal wind direction = N, NE 
+   - Optimal wind strength = < 20knts
+   Swell
+   minimum swell required > 2m 
+   Max swel < 3m 
+   Tide any
    difficulty: Advanced 
 
    Cottesloe MainBreak
-
-   Wind : E, SE, W, SW
-   windStrength < 20kn 
-   Swell: > 2m < 6m
-   Tide : low 
-   Difficulty: Beginner 
+   Wind 
+   - Optimal wind direction = S, E, SE
+   - Optimal wind strength = < 12knts
+   Swell
+   minimum swell required > 2m 
+   Max swel < 5m
+   Tide any
+   difficulty: Intermediate 
 
    Leighton 
-
-   Wind Direction: E, SE
-   Wind Strength: < 10kn
-   Swell: > 2.5m < 5m
-   Swell: Direction: SSW, W 
-   Tide: Low
-   Difficulty: Beginner 
+   Wind 
+   - Optimal wind direction = E
+   - Optimal wind strength = < 12knots
+   Swell
+   minimum swell required > 2m 
+   Max swell < 3m 
+   Tide any
+   difficulty: beginner 
 
   Cables Artificial Reef 
+   Wind 
+   - Optimal wind direction = SE, E
+   - Optimal wind strength = < 15knots
+   Swell
+   minimum swell required > 2.5m 
+   Max swel < 6m
+   Tide low tide
+   difficulty: Advanced 
 
-   Wind Direction: E, SE, W
-   Wind Strength: > 25Knts 
-   Swell : >3m 
-   Swell Direction: SSW, W
-   Tide: Lowl; 
-   Difficutly: Advanced 
-
-   Bad Weather Conditions 
+  # Where to surf in Bad Weather Conditions 
 
    Sandtrax 
-
    Wind Direction SW, W, S 
-   Wind Strength < 30knt
+   Wind Strength < 25knt
    Swell < 3m and above
    Swell Direction < W, SW, SSW, N
    Tide; mid, low, high 
@@ -144,9 +152,3 @@ Big Swell
    Swell < 3m and above
    Swell Direction < W, SW, SSW, N
    Tide; mid, low, high 
-
-
-
-
-
-Surf Spots all 
