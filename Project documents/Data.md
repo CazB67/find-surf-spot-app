@@ -5,6 +5,26 @@ Un-Surfable Wind Directions
 - wind Directions: SW, S or W, NW above 15knots 
 - swell < 1.5m 
 
+# willy Weather API to use 
+
+ Search by location Query 
+
+Forcasts - Sunrise/ Sunset
+- firstlightdatetime 
+- lastlightdatetime 
+
+Forcasts - Swell 
+- dateTime, directionText, Height, Period 
+* need to use this data through different times during the day.
+
+Forcasts - Wind 
+- datetime, directionText, speed, 
+* need to use this data through different times during the day.
+
+Forcasts - Tide 
+- datetime, type 
+* need to use this data through different times during the day.
+
 # Places to surf when the swell is small  
 
    Scaborough 
@@ -15,8 +35,7 @@ Un-Surfable Wind Directions
    - minimum swell required = 1.7m 
    - max surfable swell = 2.4m 
    - Swell direction = W, SW, N
-   Tide low Tide 
-   - 5hrs after low tide.
+   Tide: Low
    Diffuclty: Beginner 
 
    Trigg Point 
@@ -28,7 +47,7 @@ Un-Surfable Wind Directions
    - max surfable swell = < 2.5m
    Swell Direction: W, SW, N
    Tide: 
-   - 4hrs after low tide.
+   - low tide
    Difficulty: Intermediate  
 
    Cottesloe Reef 
@@ -39,7 +58,7 @@ Un-Surfable Wind Directions
     - minimal swell required = > 1.5m   
     - max swell required = < 2.5m
     - swell direction, W, SW, N
-    Tide: 5 hrs after low tide 
+    Tide: high 
     Difficulty: Beginner 
 
     Secret Harbour 
@@ -50,7 +69,7 @@ Un-Surfable Wind Directions
    - minimum swell required > 1.8m 
    - max swell required < 2.2m
     Swell Direction: S, SW, N
-    Tide: All tides
+    Tide: low  
     Difficulty: Intermediate  
 
     Lancelin (Back Beach)
@@ -61,7 +80,7 @@ Un-Surfable Wind Directions
     - Minimum Swell Required > 1.6m 
     - Maximum Swell < 2M
     Swell Direction: S, SW, N
-    Tide: All tides 
+    Tide: low  
     Difficutly: Beginner 
 
     Alkimos
@@ -72,8 +91,8 @@ Un-Surfable Wind Directions
     - Minimum Swell Required > 1.6m 
     - Maximum Sweel required < 2m
     Swell Direction: S, SW, N
-    Tide: 7hrs after low tide 
-    Difficulty; Advanced 
+    Tide: high
+    Difficulty: Advanced 
 
     Mettams (Trigg on willyweather )
     Wind 
@@ -83,10 +102,10 @@ Un-Surfable Wind Directions
     Minimum Swell Required > 1.8m 
     Maximum Swell < 2.6m
     Swell Direction: S, SW, N
-    Tide: 5hrs after hours 
-    Difficulty; intermediate 
+    Tide: high
+    Difficulty: intermediate 
 
- # where surf when the swell is big  
+ # Where surf when the swell is big  
 
    Rottnest Island (Stricklands-Bay)
    Wind
@@ -95,7 +114,7 @@ Un-Surfable Wind Directions
    Swell
    minimum swell required > 2m 
    Max swel < 3m 
-   Tide any
+   Tide: high 
    difficulty: Advanced 
 
    Cottesloe MainBreak
@@ -105,7 +124,7 @@ Un-Surfable Wind Directions
    Swell
    minimum swell required > 2m 
    Max swel < 5m
-   Tide any
+   Tide: Low 
    difficulty: Intermediate 
 
    Leighton 
@@ -115,8 +134,8 @@ Un-Surfable Wind Directions
    Swell
    minimum swell required > 2m 
    Max swell < 3m 
-   Tide any
-   difficulty: beginner 
+   Tide: low
+   Difficulty: Beginner 
 
   Cables Artificial Reef 
    Wind 
@@ -125,8 +144,8 @@ Un-Surfable Wind Directions
    Swell
    minimum swell required > 2.5m 
    Max swel < 6m
-   Tide low tide
-   difficulty: Advanced 
+   Tide: High
+   Difficulty: Advanced 
 
   # Where to surf in Bad Weather Conditions 
 
@@ -135,7 +154,8 @@ Un-Surfable Wind Directions
    Wind Strength < 25knt
    Swell < 3m and above
    Swell Direction < W, SW, SSW, N
-   Tide; mid, low, high 
+   Tide: Low 
+   Difficulty: Beginner 
 
    Cottesloe MainBreak 
 
@@ -143,7 +163,8 @@ Un-Surfable Wind Directions
    Wind Strength < 25knt
    Swell < 3m and above
    Swell Direction < W, SW, SSW, N
-   Tide; mid, low, high 
+   Tide: Low 
+   Difficulty: Advanced 
 
    Hilarys Marina 
 
@@ -151,4 +172,5 @@ Un-Surfable Wind Directions
    Wind Strength < 25knt
    Swell < 3m and above
    Swell Direction < W, SW, SSW, N
-   Tide; mid, low, high 
+   Tide: Low 
+   Difficulty: Beginner 
