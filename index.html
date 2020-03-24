@@ -32,8 +32,10 @@
     <script src = "javascripts/api_scripts.js"></script>
     <script src = "javascripts/scripts.js"></script>
 
-    <!--Modal-->
-    <div class = "reveal" id = "exampleModal1" data-reveal>
+  <div class="container">
+
+     <!--Modal-->
+     <div class = "reveal" id = "exampleModal1" data-reveal>
       <h1>Awesome. I Have It.</h1>
       <p class="lead">Your couch. It is mine.</p>
       <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
@@ -41,16 +43,13 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    
-
-  <div class="container">
 
     
     
      <!--Start Jumbotron -->
     <div class="callout large background-image">
       <div class="row column text-center">
-        <h1>Find Surf Spot</h1>
+        <h1 id="search-box-heading">Find Surf Spot</h1>
         <p class="lead">Looking for where to surf in Perth? We have you covered.</p>
       </div>
     </div>
@@ -67,7 +66,7 @@
      <!-- Start form and input information on left hand side -->
      <div class="row">
       <div class="medium-12 small-12 columns">
-        <h4>Search Surf Spots</h4>
+        <h3>Search Surf Spots</h3>
       </div>
     </div>
     <div class="row ">
@@ -78,10 +77,6 @@
             <div class="grid-container">
             <div class="grid-x grid-padding-x">
             <div class="medium-12 cell">
-              <label>Post Code
-                <input type="number" placeholder="6000" class="input" id="post-code">
-              </label>
-
               <label>Ability
                 <select class="input" id="ability">
                   <option value="beginner">Beginner</option>
@@ -92,18 +87,9 @@
 
               <label>When do you want to surf?
                 <select class="input" id="when">
-                  <option value="todayAM">Today AM</option>
-                  <option value="todayPM">Today PM</option>
-                  <option value="tomorrowAM">Tomorrow AM</option>
-                   <option value="tomorrowPM">Tomorrow PM</option>
-                </select>
-              </label>
-              
-              <label>How far are you willing to travel?
-                <select class="input" id="distance">
-                  <option value="20km">20km</option>
-                  <option value="50km">50km</option>
-                  <option value="100km">100km</option>
+                  <option value="morning"> 6am - 9am</option>
+                  <option value="midday">11am - 2pm</option>
+                  <option value="afternoon">3pm - 6pm</option>
                 </select>
               </label>
             </div>
@@ -114,6 +100,7 @@
             </div>
           </form>
           </div>
+          <div class="surf-img"></div>
       </div>
       <!-- End of form and input information on left hand side -->
 
@@ -216,7 +203,7 @@
     </div>
     
     <div class="row">
-      <div class="medium-4 small-12 columns">
+      <div class="medium-3 small-12 columns">
         <p>Weather warnings:</p>
         <p>Swell direction</p>
         <p>Swell size:</p>
@@ -224,7 +211,7 @@
         <p>Wind direction:</p>
       </div>
       
-      <div class="medium-4 small-12 columns">
+      <div class="medium-3 small-12 columns">
           <p>Temperature:</p>
           <p>UV Index:</p>
           <p>Tide times:</p>
@@ -232,8 +219,13 @@
           <p>Sunset:</p>
       </div>
 
-      <div class="medium-4 small-12 columns text-center" id="map">
-        <img src="https://placehold.it/200x200" class="thumbnail" alt="">
+      <div class="medium-6 small-12 columns text-center" id="map_canvas">
+        <iframe
+          width="400"
+          height="300"
+          frameborder="0" style="border:1"
+          src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+        </iframe>
       </div>
     </div>
 
