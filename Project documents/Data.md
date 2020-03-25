@@ -25,7 +25,7 @@ Forcasts - Tide
 - datetime, type 
 * need to use this data through different times during the day.
 
-# Places to surf when the swell is small  
+# Places to surf when the swell is small above 1.6m
 
    Scaborough 
    Wind 
@@ -105,7 +105,7 @@ Forcasts - Tide
     Tide: high
     Difficulty: intermediate 
 
- # Where surf when the swell is big  
+ # Where surf when the swell is big  Above 2m
 
    Rottnest Island (Stricklands-Bay)
    Wind
@@ -166,11 +166,4 @@ Forcasts - Tide
    Tide: Low 
    Difficulty: Advanced 
 
-   Hilarys Marina 
-
-   Wind Direction SW, W, S 
-   Wind Strength < 25knt
-   Swell < 3m and above
-   Swell Direction < W, SW, SSW, N
-   Tide: Low 
-   Difficulty: Beginner 
+ 
