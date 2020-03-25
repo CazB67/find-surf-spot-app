@@ -3,31 +3,11 @@ $(document).ready(function() {
 
    // $(document).foundation();  //don't delete.  Won't work without this statement.
 
-<<<<<<< HEAD
     $("#search-btn").on("click", function() {
         var x = new Foundation.Reveal($("#exampleModal1"));
         x.open();
         //https://stackoverflow.com/questions/33855505/zurb-foundation-6-reveal-doesnt-work
         //$('#exampleModal1').foundation('reveal', 'open');
-=======
-    function showAlert(headerText='Warning', bodytext='Oops - something strange happened',type='warning',code){
-       console.log('show alert function');
-        // $('#alertmodal').attr('class','alert alert-'+ type);
-        $('#alert-heading').prop('innerHTML',headerText);
-        $('#alert-text').prop('innerHTML',bodytext);
-        
-        $('#alertmodal').foundation('open');
-    }
-    
-    function hideAlert(){
-        console.log('hiding alert');
-        $('#alertmodal').foundation('close');
-    }
-
-
-
-
->>>>>>> master
     });
 
     $('#alertCloseBtn').on('click',function(){

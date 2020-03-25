@@ -1,4 +1,3 @@
-$(document).ready(function(){
 
     const ww_ids = [{
         location: 'Trigg Beach',
@@ -235,5 +234,5 @@ function getDataFromWW(beacharray=[], start_date){
 
 getDataFromWW(ww_ids,moment());
 
-});
+
 
