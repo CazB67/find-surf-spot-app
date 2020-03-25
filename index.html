@@ -5,61 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-      <!-- Compressed JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation-essential/6.2.2/js/vendor/jquery.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js" 
-      integrity="sha256-WUKHnLrIrx8dew//IpSEmPN/NT3DGAEmIePQYIEJLLs= sha384-53StQWuVbn6figscdDC3xV00aYCPEz3srBdV/QGSXw3f19og3Tq2wTRe0vJqRTEO sha512-X9O+2f1ty1rzBJOC8AXBnuNUdyJg0m8xMKmbt9I3Vu/UOWmSg5zG+dtnje4wAZrKtkopz/PEDClHZ1LXx5IeOw==" crossorigin="anonymous"></script>
-      
-
-      <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
-      
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
-      
-      <link href="https://fonts.googleapis.com/css?family=Kalam|Rock+Salt&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Kalam|Rock+Salt&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="style.css"/>
     
+      <!-- Compressed JavaScript -->
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation-essential/6.2.2/js/vendor/jquery.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.core.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/foundation.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.reveal.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.touch.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.triggers.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.keyboard.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.mediaQuery.min.js"></script>
+      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.motion.min.js"></script>
+      
 
     <title>Find Surf Spot</title>
   </head>
 
   <body>
 
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-   <!-- <script src="javascripts/api_scripts.js"></script> -->
-    <script src="javascripts/scripts.js"></script>
-
-
-    <div class='container-fluid'>
-      <div class='row'> 
-          <div class="reveal" role="dialog" id='alertmodal' aria-hidden="true">
-              <div class="modal-header">
-                  <h5 id='alert-heading'></h5>
-              </div>
-              <div class="modal-body">
-                  <p id="alert-text" text="Error"></p>
-              </div>
-              <div class="modal-footer">
-                  <button class="close-button" type="button" data-close aria-label="Close modal" id='alertCloseBtn'>
-                      <span aria-hidden="true">Close</span>
-                  </button>
-              </div>
-          </div>
-     </div>
-
-
-    
     
 
   <div class="container">
+
+     <!--Modal-->
+     <div class = "reveal" id = "exampleModal1" data-reveal>
+      <h1>Awesome. I Have It.</h1>
+      <p class="lead">Your couch. It is mine.</p>
+      <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    
     
      <!--Start Jumbotron -->
     <div class="callout large background-image">
       <div class="row column text-center">
-        <h1>Find Surf Spot</h1>
+        <h1 id="search-box-heading">Find Surf Spot</h1>
         <p class="lead">Looking for where to surf in Perth? We have you covered.</p>
       </div>
     </div>
@@ -76,7 +59,8 @@
      <!-- Start form and input information on left hand side -->
      <div class="row">
       <div class="medium-12 small-12 columns">
-        <h4>Search Surf Spots</h4>
+        <h3>Search Surf Spots</h3>
+        <br>
       </div>
     </div>
     <div class="row ">
@@ -87,10 +71,7 @@
             <div class="grid-container">
             <div class="grid-x grid-padding-x">
             <div class="medium-12 cell">
-              <label>Post Code
-                <input type="number" placeholder="6000" class="input" id="post-code">
-              </label>
-
+              <br>
               <label>Ability
                 <select class="input" id="ability">
                   <option value="beginner">Beginner</option>
@@ -101,28 +82,21 @@
 
               <label>When do you want to surf?
                 <select class="input" id="when">
-                  <option value="todayAM">Today AM</option>
-                  <option value="todayPM">Today PM</option>
-                  <option value="tomorrowAM">Tomorrow AM</option>
-                   <option value="tomorrowPM">Tomorrow PM</option>
-                </select>
-              </label>
-              
-              <label>How far are you willing to travel?
-                <select class="input" id="distance">
-                  <option value="20km">20km</option>
-                  <option value="50km">50km</option>
-                  <option value="100km">100km</option>
+                  <option value="morning"> 6am - 9am</option>
+                  <option value="midday">11am - 2pm</option>
+                  <option value="afternoon">3pm - 6pm</option>
                 </select>
               </label>
             </div>
             </div>
             </div>
             <div class="text-center">
+              <br>
             <button type="button" class="button primary" id="search-btn">Search</button>
             </div>
           </form>
           </div>
+          <div class="surf-img"></div>
       </div>
       <!-- End of form and input information on left hand side -->
 
@@ -186,11 +160,20 @@
 
            <li class = "orbit-slide">
             <figure class="orbit-figure">
-              <img src="https://placehold.it/800x460" class="" alt="">
-              <figcaption class="orbit-caption"> Beach</figcaption>
-              <p class = "text-center photo-credit">Photo by</p>
+              <img src="./images/surfing-1963419_1920.jpg" class="" alt="">
+              <figcaption class="orbit-caption"> Trigg Beach</figcaption>
+              <p class = "text-center photo-credit">Image by arturdanielewski5 from Pixabay</p>
             </figure>
            </li>
+        
+
+          <li class = "orbit-slide">
+            <figure class="orbit-figure">
+              <img src="./images/surfing-1963419_1920.jpg" class="" alt="">
+              <figcaption class="orbit-caption"> Trigg Beach</figcaption>
+              <p class = "text-center photo-credit">Image by arturdanielewski5 from Pixabay</p>
+            </figure>
+          </li>
         </ul>
 
         <nav class = "orbit-bullets">
@@ -210,6 +193,11 @@
            <button data-slide = "3">
               <span class = "show-for-sr">Fourth slide</span>
            </button>
+
+           <button data-slide = "4">
+            <span class = "show-for-sr">Fifth slide</span>
+         </button>
+
         </nav>
      </div>
     </div>
@@ -221,11 +209,12 @@
     <div class="row">
       <div class="medium-12 small-12 columns">
         <h3>Scarborough Beach</h3>
+        <br>
       </div>
     </div>
     
     <div class="row">
-      <div class="medium-4 small-12 columns">
+      <div class="medium-3 small-12 columns">
         <p>Weather warnings:</p>
         <p>Swell direction</p>
         <p>Swell size:</p>
@@ -233,7 +222,7 @@
         <p>Wind direction:</p>
       </div>
       
-      <div class="medium-4 small-12 columns">
+      <div class="medium-3 small-12 columns">
           <p>Temperature:</p>
           <p>UV Index:</p>
           <p>Tide times:</p>
@@ -241,8 +230,13 @@
           <p>Sunset:</p>
       </div>
 
-      <div class="medium-4 small-12 columns text-center" id="map">
-        <img src="https://placehold.it/200x200" class="thumbnail" alt="">
+      <div class="medium-6 small-12 columns text-center" id="map_canvas">
+        <iframe
+          width="400"
+          height="300"
+          frameborder="0" style="border:1"
+          src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+        </iframe>
       </div>
     </div>
 
@@ -263,6 +257,7 @@
     </div>
   </div>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDYwEuWmjLe3BUZX9pD-NVXIsp2HLpe7o&libraries=places"></script>
+    
     
     
     

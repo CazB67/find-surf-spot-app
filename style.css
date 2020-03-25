@@ -50,8 +50,13 @@ h1, h3, h4 {
       padding-bottom: 10px;
   }
   
-  .orbit-figure {
-    
+  iframe {
+    max-width:100%
   }
-  
+
+  .surf-img {
+      height: 30px;
+      background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
+      width: 100%;
+  }
   

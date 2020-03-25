@@ -19,20 +19,7 @@ $(document).ready(function() {
 
 
 
-    //Search button on click event
-    $("#search-btn").on("click", function(){
 
-       showAlert('hi there', 'just an example','warning','code');
-       console.log( $("#post-code").val());
-       console.log( $("#ability").val());
-       console.log( $("#when").val());
-       console.log( $("#distance").val());
-
-       //If users don't type in post code it shows up as an empty string 
-       if( $("#post-code").val() === ""){
-        alert("Hi");
-       }
-      
     });
 
     $('#alertCloseBtn').on('click',function(){
@@ -40,7 +27,7 @@ $(document).ready(function() {
     })
 
     //Results on click event
-    $(".results").on("click", function(event){
+    $(".results").on("click", function(event) {
         alert("Hi");
     });
 
