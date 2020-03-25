@@ -7,9 +7,14 @@
 
       <!-- Compressed JavaScript -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation-essential/6.2.2/js/vendor/jquery.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js" integrity="sha256-WUKHnLrIrx8dew//IpSEmPN/NT3DGAEmIePQYIEJLLs= sha384-53StQWuVbn6figscdDC3xV00aYCPEz3srBdV/QGSXw3f19og3Tq2wTRe0vJqRTEO sha512-X9O+2f1ty1rzBJOC8AXBnuNUdyJg0m8xMKmbt9I3Vu/UOWmSg5zG+dtnje4wAZrKtkopz/PEDClHZ1LXx5IeOw==" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js" 
+      integrity="sha256-WUKHnLrIrx8dew//IpSEmPN/NT3DGAEmIePQYIEJLLs= sha384-53StQWuVbn6figscdDC3xV00aYCPEz3srBdV/QGSXw3f19og3Tq2wTRe0vJqRTEO sha512-X9O+2f1ty1rzBJOC8AXBnuNUdyJg0m8xMKmbt9I3Vu/UOWmSg5zG+dtnje4wAZrKtkopz/PEDClHZ1LXx5IeOw==" crossorigin="anonymous"></script>
+      
+
       <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
+      
       <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
+      
       <link href="https://fonts.googleapis.com/css?family=Kalam|Rock+Salt&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
       <link href="https://fonts.googleapis.com/css?family=Kalam|Rock+Salt&display=swap" rel="stylesheet">
@@ -20,10 +25,33 @@
   </head>
 
   <body>
-    <!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="javascripts/api_scripts.js"></script>
+   <!-- <script src="javascripts/api_scripts.js"></script> -->
     <script src="javascripts/scripts.js"></script>
+
+
+    <div class='container-fluid'>
+      <div class='row'> 
+          <div class="reveal" role="dialog" id='alertmodal' aria-hidden="true">
+              <div class="modal-header">
+                  <h5 id='alert-heading'></h5>
+              </div>
+              <div class="modal-body">
+                  <p id="alert-text" text="Error"></p>
+              </div>
+              <div class="modal-footer">
+                  <button class="close-button" type="button" data-close aria-label="Close modal" id='alertCloseBtn'>
+                      <span aria-hidden="true">Close</span>
+                  </button>
+              </div>
+          </div>
+     </div>
+
+
+    
     
 
   <div class="container">
