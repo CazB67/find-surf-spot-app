@@ -157,34 +157,52 @@ function getMinMaxAvg(numbers=[]){
     
 }
 
-function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime){
+function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callback){
+    var data = [];
+    var done=0;
     if(beacharray === []){
         return [];
     }
+    //console.log('Sites:' + beacharray.length);
     for(var index=0; index<beacharray.length; index++) {
         var locn_id=beacharray[index].ww_id;
         //var whichDate=moment(start_date).format('YYYY-MM-DD');
         var queryURL=makewwURL(locn_id,start_date);
         var gotData=false;
-        var data = [];
         var data_selection = {};
         var start_time=starttime;
         var whichday = parseInt(whichdayindex); // 0 for today, 1 for tomorrow
         var errors = [];
+        var precis_time=5;
+        
+        switch (starttime){
+            case 6:
+                precis_time=5;
+                break;
+            case 11: 
+                precis_time=11;
+                break;
+            case 15:
+                precis_time=14;
+                break;
+        };
 
    $.ajax({
             url: queryURL,
             dataType: 'json',
             method: "GET",
             error: function(response){
-                errors.push(queryURL);
+                //errors.push(queryURL);
                 console.log(queryURL);
+                ++done;
             },
             success: function(response){
+                console.log('success function');
+                console.log({whichday});
+                console.log({start_time});
                 console.log(response);
                 data_selection={
                     'name': response.location.name,
-                    
                      'swell_heights':getMinMaxAvg([
                         response.forecasts.swell.days[whichday].entries[start_time].height,
                         response.forecasts.swell.days[whichday].entries[start_time+1].height,
@@ -221,9 +239,9 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime){
                         response.forecasts.wind.days[whichday].entries[start_time+2].directionText
                     ],
                     'precis_texts': [
-                        response.forecasts.precis.days[whichday].entries[start_time].precis,
-                        response.forecasts.precis.days[whichday].entries[start_time+1].precis,
-                        response.forecasts.precis.days[whichday].entries[start_time+2].precis
+                        response.forecasts.precis.days[whichday].entries[precis_time].precis,
+                        response.forecasts.precis.days[whichday].entries[precis_time+1].precis,
+                        response.forecasts.precis.days[whichday].entries[precis_time+2].precis
                     ],
                     'temperatures': getMinMaxAvg([
                         response.forecasts.temperature.days[whichday].entries[start_time].temperature,
@@ -240,31 +258,29 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime){
                         response.forecasts.uv.days[whichday].entries[start_time+1].scale,
                         response.forecasts.uv.days[whichday].entries[start_time+2].scale
                     ],
-                    'sunrise_firstlight': response.forecasts.sunsrisesunset.days[whichday].entries[0].firstLightDateTime,
-                    'sunrise': response.forecasts.sunsrisesunset.days[whichday].entries[0].riseDateTime,
-                    'sunset_lastlight' : response.forecasts.sunsrisesunset.days[whichday].entries[0].lastLightDateTime,
-                    'sunset': response.forecasts.sunsrisesunset.days[whichday].entries[0].setDateTime
-                }
+                    'sunrise_firstlight': response.forecasts.sunrisesunset.days[whichday].entries[0].firstLightDateTime,
+                    'sunrise': response.forecasts.sunrisesunset.days[whichday].entries[0].riseDateTime,
+                    'sunset_lastlight' : response.forecasts.sunrisesunset.days[whichday].entries[0].lastLightDateTime,
+                    'sunset': response.forecasts.sunrisesunset.days[whichday].entries[0].setDateTime
+                };
+                
+            data.push(data_selection);
+            ++done;
+            console.log ({done});
             }
         }).done(function(response){
-            //console.log('finished')
+            //console.log(response.location.name + ' IS finished')
             gotData=true;
-            console.log(data_selection);    
-            data.push(data_selection);  
+            //console.log(data_selection);
+            if (done==beacharray.length-1){
+                //console.log("do callback now");
+                callback(data);
+            }                              
         });
         
     };
-            
-        
-        if (gotData===true){
-            return data;
-        } else return [];
-
+    
+    
+      
 }
-
-
-
-
-// https://api.willyweather.com.au/v2/ZWZjODA2NGIyMGQxZThjYmZmNzE3Mz/search/closest.json?id=18919&weatherTypes=weather,wind,rainfall,sunrisesunset,moonphases,uv,tides,swell&units=distance:km
-//});
 
