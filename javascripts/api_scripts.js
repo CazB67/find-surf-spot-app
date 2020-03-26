@@ -218,7 +218,7 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
                 ++done;
             },
             success: function(response){
-                console.log(response.forecasts.uv);
+                console.log(response);
                 data_selection={
                     'ww_id':response.location.id,
                     'ww_name': response.location.name,
