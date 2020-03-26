@@ -9,14 +9,6 @@
         postcode: '6029',
     },
     {
-        location: 'Cottesloe Reef',
-        ww_locn: 'Cottesloe+Beach',
-        ww_id: 18824,
-        lat: -31.996,
-        lng: 115.751,
-        postcode: '6011',
-    },
-    {
         location: 'Scarborough Beach',
         ww_locn: 'Scarborough+Beach',
         ww_id: 19555,
@@ -31,7 +23,7 @@
         lat: -31.995,
         lng: 115.54,
         postcode: '6161'
-    },
+    },/* 
     {
         location: 'Mandurah',
         ww_locn: 'Mandurah',
@@ -39,7 +31,7 @@
         lat: -32.533,
         lng: 115.733,
         postcode: '6210'
-    },
+    }, */
     {
         location: 'Lancelin',
         ww_locn: 'Lancelin',
@@ -47,14 +39,6 @@
         lat: -31.021,
         lng: 115.332,
         postcode: '6044'
-    },
-    {
-        location: 'Leighton Beach',
-        ww_locn: 'Leighton+Beach',
-        ww_id: 18920,
-        lat: -32.03,
-        lng: 115.747,
-        postcode: '6159'
     },
     {
         location: 'Alkimos',
@@ -88,8 +72,25 @@
         lng: 115.751,
         postcode: '6011',
     },
+    
+    {
+        location: 'Cottesloe Reef',
+        ww_locn: 'Cottesloe+Beach',
+        ww_id: 18824,
+        lat: -31.996,
+        lng: 115.751,
+        postcode: '6011',
+    },
     {
         location: 'Sand Tracks Beach',
+        ww_locn: 'Leighton+Beach',
+        ww_id: 18920,
+        lat: -32.03,
+        lng: 115.747,
+        postcode: '6159'
+    },
+    {
+        location: 'Leighton Beach',
         ww_locn: 'Leighton+Beach',
         ww_id: 18920,
         lat: -32.03,
@@ -124,13 +125,8 @@ function makewwURL(location='',start_date=Date()){
         var middle_data = '/locations/';
 
         //var suffix_id = '&limit=1';
-        var suffix_data = '/weather.json?forecasts=swell,wind,precis,temperature,weather&days=2&startDate=';
+        var suffix_data = '/weather.json?forecasts=swell,wind,precis,temperature,sunrisesunset,uv&days=2&startDate=';
         var datestring = moment(start_date).format('YYYY-MM-DD');
-
-
-
-        //https://api.willyweather.com.au/v2/ZWZjODA2NGIyMGQxZThjYmZmNzE3Mz/locations/18919/weather.json?forecasts=swell,wind,precis,temperature,weather&days=3&startDate=2020-03-21
-
 
         var queryURL = www_addr + api_key + middle_data + searchlocn + suffix_data + datestring;
         return queryURL;
@@ -138,10 +134,30 @@ function makewwURL(location='',start_date=Date()){
 
     }
 
+function getAverage(numbers=[]) {
+    var total = 0, i;
+    for (i = 0; i < numbers.length; i += 1) {
+        total += numbers[i];
+    }
+    return total / numbers.length;
 
+}
+function getMaxOfArray(numArray) {
+    return Math.max.apply(null, numArray);
+  }
+function getMinOfArray(numArray) {
+    return Math.min.apply(null, numArray);
+}
 
+function getMinMaxAvg(numbers=[]){
+    var numbers_avg=getAverage(numbers);
+    var numbers_min=getMinOfArray(numbers);
+    var numbers_max=getMaxOfArray(numbers);
+    return [numbers_min,numbers_avg,numbers_max];
+    
+}
 
-function getDataFromWW(beacharray=[], start_date){
+function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime){
     if(beacharray === []){
         return [];
     }
@@ -152,78 +168,89 @@ function getDataFromWW(beacharray=[], start_date){
         var gotData=false;
         var data = [];
         var data_selection = {};
-        var start_time=6;
-        var whichday = 0; // 0 for today, 1 for tomorrow
-        
-   /*  $.get(queryURL).done(function (data) {
-        console.log("the new way works")
-    }); */
+        var start_time=starttime;
+        var whichday = parseInt(whichdayindex); // 0 for today, 1 for tomorrow
+        var errors = [];
 
-    
-        $.ajax({
+   $.ajax({
             url: queryURL,
             dataType: 'json',
-            async:false,
-            beforeSend:function(){
-
-            },
-            headers: {  
-                /* "Access-Control-Allow-Origin" : "https://jo3005/github.io",
-                'Content-Type': 'application/json' */
-            },
             method: "GET",
+            error: function(response){
+                errors.push(queryURL);
+                console.log(queryURL);
+            },
             success: function(response){
-                console.log("yay - success at last!");
+                console.log(response);
                 data_selection={
-                    'swell_heights':[
+                    'name': response.location.name,
+                    
+                     'swell_heights':getMinMaxAvg([
                         response.forecasts.swell.days[whichday].entries[start_time].height,
                         response.forecasts.swell.days[whichday].entries[start_time+1].height,
                         response.forecasts.swell.days[whichday].entries[start_time+2].height
-                    ],
-                    'ave_swell_height': 0,
-                    
-                    'swell_periods':[
+                    ]),
+                    'swell_periods':getMinMaxAvg([
                         response.forecasts.swell.days[whichday].entries[start_time].period,
                         response.forecasts.swell.days[whichday].entries[start_time+1].period,
                         response.forecasts.swell.days[whichday].entries[start_time+2].period
-                    ],
-                    'ave_swell_period' : 0,
-
-                    'swell_directions':[
+                    ]),
+                    'swell_directions':getMinMaxAvg([
                         response.forecasts.swell.days[whichday].entries[start_time].direction,
                         response.forecasts.swell.days[whichday].entries[start_time+1].direction,
                         response.forecasts.swell.days[whichday].entries[start_time+2].direction
-                    ],
-                    'ave_swell_direction' : 0,
+                    ]),
                     'swell_direction_texts' : [
                         response.forecasts.swell.days[whichday].entries[start_time].directionText,
                         response.forecasts.swell.days[whichday].entries[start_time+1].directionText,
                         response.forecasts.swell.days[whichday].entries[start_time+2].directionText
                     ],
-                    'wind_speeds' : [
+                    'wind_speeds' : getMinMaxAvg([
                         response.forecasts.wind.days[whichday].entries[start_time].speed,
                         response.forecasts.wind.days[whichday].entries[start_time+1].speed,
                         response.forecasts.wind.days[whichday].entries[start_time+2].speed
-                    ],
-                    'ave_wind_speed': 0,
-                    'wind_directions': [
+                    ]),
+                    'wind_directions': getMinMaxAvg([
                         response.forecasts.wind.days[whichday].entries[start_time].direction,
                         response.forecasts.wind.days[whichday].entries[start_time+1].direction,
                         response.forecasts.wind.days[whichday].entries[start_time+2].direction
-                    ],
-                    'ave_wind_direction' : 0,
+                    ]),
                     'wind_direction_texts' : [
                         response.forecasts.wind.days[whichday].entries[start_time].directionText,
                         response.forecasts.wind.days[whichday].entries[start_time+1].directionText,
                         response.forecasts.wind.days[whichday].entries[start_time+2].directionText
-                    ]
+                    ],
+                    'precis_texts': [
+                        response.forecasts.precis.days[whichday].entries[start_time].precis,
+                        response.forecasts.precis.days[whichday].entries[start_time+1].precis,
+                        response.forecasts.precis.days[whichday].entries[start_time+2].precis
+                    ],
+                    'temperatures': getMinMaxAvg([
+                        response.forecasts.temperature.days[whichday].entries[start_time].temperature,
+                        response.forecasts.temperature.days[whichday].entries[start_time+1].temperature,
+                        response.forecasts.temperature.days[whichday].entries[start_time+2].temperature
+                    ]),
+                    'uvs': getMinMaxAvg([
+                        response.forecasts.uv.days[whichday].entries[start_time].index,
+                        response.forecasts.uv.days[whichday].entries[start_time+1].index,
+                        response.forecasts.uv.days[whichday].entries[start_time+2].index
+                    ]),
+                    'uv_texts': [
+                        response.forecasts.uv.days[whichday].entries[start_time].scale,
+                        response.forecasts.uv.days[whichday].entries[start_time+1].scale,
+                        response.forecasts.uv.days[whichday].entries[start_time+2].scale
+                    ],
+                    'sunrise_firstlight': response.forecasts.sunsrisesunset.days[whichday].entries[0].firstLightDateTime,
+                    'sunrise': response.forecasts.sunsrisesunset.days[whichday].entries[0].riseDateTime,
+                    'sunset_lastlight' : response.forecasts.sunsrisesunset.days[whichday].entries[0].lastLightDateTime,
+                    'sunset': response.forecasts.sunsrisesunset.days[whichday].entries[0].setDateTime
                 }
             }
         }).done(function(response){
             //console.log('finished')
             gotData=true;
             console.log(data_selection);    
-            //data.push(data_selection);  
+            data.push(data_selection);  
         });
         
     };
@@ -235,9 +262,6 @@ function getDataFromWW(beacharray=[], start_date){
 
 }
 
-
-
-getDataFromWW(ww_ids,moment());
 
 
 

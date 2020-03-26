@@ -3,12 +3,15 @@ $(document).ready(function() {
 
 var glwhichDay=0; // Day to extract data for each timeslot,  0 =today, 1=tomorrow 
 var glAbility='beginner';
+var glStartHr=6;
 
     $(document).foundation();
 
     $("#search-btn").on("click", function() {
-        var x = new Foundation.Reveal($("#exampleModal1"));
-        x.open();
+       
+        getDataFromWW(ww_ids,moment(),glwhichDay,glStartHr);
+        // var x = new Foundation.Reveal($("#exampleModal1"));
+        // x.open();
         //https://stackoverflow.com/questions/33855505/zurb-foundation-6-reveal-doesnt-work
         //$('#exampleModal1').foundation('reveal', 'open');
     });
@@ -45,7 +48,7 @@ var glAbility='beginner';
 
     }
 
-
+    
     $('#when').on('change',function(event){
         var when = event.target.value;
         //console.log(when);
@@ -54,6 +57,14 @@ var glAbility='beginner';
         //console.log({whichDayIndex});      
         glwhichDay=whichDayIndex;
 
+        var starthr=6;
+        if (when==='midday') {
+            starthr=11
+        } else if (when === 'afternoon') {
+            starthr=15
+        };
+
+        glStartHr=starthr;
 
     });
 
