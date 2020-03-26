@@ -5,6 +5,7 @@ var glwhichDay=0; // Day to extract data for each timeslot,  0 =today, 1=tomorro
 var glAbility='beginner';
 var glStartHr=6;
 var glData=[];
+var timerObj;
 
     $(document).foundation();
 
@@ -44,12 +45,32 @@ var glData=[];
         }
         return whichDayIndex;
     }
+
+    
     
     $("#search-btn").on("click", function() {
-       
+
+        function checkForData(){
+            var recs_received=glData.length;
+            if (recs_received<1) {
+                return;
+            }; 
+            if (recs_received<9) {
+                console.log('Records received: ' + recs_received);
+            } else if (recs_received==9){
+                console.log('Have All Data');
+                console.log(glData);
+                clearInterval(timerObj);
+            }
+        }
+        //Gets the data from the WW API and puts it into the global variable
         getDataFromWW(ww_ids,moment(),glwhichDay,glStartHr,updateGlobal);
          
-        
+        //Checks whether data has been received in the global variable
+        timerObj=setInterval(function () {
+            checkForData()
+        },200);
+
         // var x = new Foundation.Reveal($("#exampleModal1"));
         // x.open();
         //https://stackoverflow.com/questions/33855505/zurb-foundation-6-reveal-doesnt-work
@@ -78,7 +99,7 @@ var glData=[];
     $('#ability').on('change',function(event){
         var thisAbility=event.target.value;
         glAbility=thisAbility;
-        console.log(glAbility);
+        //console.log(glAbility);
     })
 
 });

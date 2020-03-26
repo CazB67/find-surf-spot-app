@@ -39,7 +39,7 @@
         lat: -31.021,
         lng: 115.332,
         postcode: '6044'
-    },
+    },/* 
     {
         location: 'Alkimos',
         ww_locn: 'Alkimos',
@@ -47,7 +47,7 @@
         lat: -31.609,
         lng: 115.691,
         postcode: '6038'
-    },
+    }, */
     {
         location: 'Secret Harbour',
         ww_locn: 'Secret+Harbour',
@@ -115,6 +115,17 @@
     }
 ];
 
+function getUniqueIDs(beacharray){
+    var ids=[beacharray[0].ww_id];
+    var newid=0;
+
+    for (var i=1; i<beacharray.length; i++){
+        newid=beacharray[i].ww_id;
+        if(ids.indexOf(newid)===-1) ids.push(newid);
+        //console.log(ids);
+    }
+    return ids;
+}
 
 function makewwURL(location='',start_date=Date()){
     if (location!== ''){
@@ -160,34 +171,44 @@ function getMinMaxAvg(numbers=[]){
 function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callback){
     var data = [];
     var done=0;
+    var id_list=[];
+
     if(beacharray === []){
         return [];
-    }
-    //console.log('Sites:' + beacharray.length);
-    for(var index=0; index<beacharray.length; index++) {
-        var locn_id=beacharray[index].ww_id;
+    } else {
+        id_list=getUniqueIDs(beacharray);
+    };
+
+    console.log('Sites:' + id_list.length);
+    for(var index=0; index<id_list.length; index++) {
+        var locn_id=id_list[index];
         //var whichDate=moment(start_date).format('YYYY-MM-DD');
         var queryURL=makewwURL(locn_id,start_date);
         var gotData=false;
         var data_selection = {};
         var start_time=starttime;
         var whichday = parseInt(whichdayindex); // 0 for today, 1 for tomorrow
-        var errors = [];
+        //var errors = [];
         var precis_time=5;
+        var uv_time=0;
         
+        //Precis is only provided every 3 hours
         switch (starttime){
             case 6:
-                precis_time=5;
+                precis_time=1;  // corresponds to 5am
+                uv_time=0; // corresponds to 6am - 1st reading
                 break;
             case 11: 
-                precis_time=11;
+                precis_time=3; // corresponds to 11am
+                uv_time=5; // corresponds to 11am
                 break;
             case 15:
-                precis_time=14;
+                precis_time=5; //corresponds to 5pm
+                uv_time=9; // corresponds to 3pm
                 break;
         };
 
-   $.ajax({
+        $.ajax({
             url: queryURL,
             dataType: 'json',
             method: "GET",
@@ -197,12 +218,10 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
                 ++done;
             },
             success: function(response){
-                console.log('success function');
-                console.log({whichday});
-                console.log({start_time});
-                console.log(response);
+                console.log(response.forecasts.uv);
                 data_selection={
-                    'name': response.location.name,
+                    'ww_id':response.location.id,
+                    'ww_name': response.location.name,
                      'swell_heights':getMinMaxAvg([
                         response.forecasts.swell.days[whichday].entries[start_time].height,
                         response.forecasts.swell.days[whichday].entries[start_time+1].height,
@@ -238,25 +257,21 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
                         response.forecasts.wind.days[whichday].entries[start_time+1].directionText,
                         response.forecasts.wind.days[whichday].entries[start_time+2].directionText
                     ],
-                    'precis_texts': [
-                        response.forecasts.precis.days[whichday].entries[precis_time].precis,
-                        response.forecasts.precis.days[whichday].entries[precis_time+1].precis,
-                        response.forecasts.precis.days[whichday].entries[precis_time+2].precis
-                    ],
+                    'precis_texts': response.forecasts.precis.days[whichday].entries[precis_time].precis,
                     'temperatures': getMinMaxAvg([
                         response.forecasts.temperature.days[whichday].entries[start_time].temperature,
                         response.forecasts.temperature.days[whichday].entries[start_time+1].temperature,
                         response.forecasts.temperature.days[whichday].entries[start_time+2].temperature
                     ]),
                     'uvs': getMinMaxAvg([
-                        response.forecasts.uv.days[whichday].entries[start_time].index,
-                        response.forecasts.uv.days[whichday].entries[start_time+1].index,
-                        response.forecasts.uv.days[whichday].entries[start_time+2].index
+                        response.forecasts.uv.days[whichday].entries[uv_time].index,
+                        response.forecasts.uv.days[whichday].entries[uv_time+1].index,
+                        response.forecasts.uv.days[whichday].entries[uv_time+2].index
                     ]),
                     'uv_texts': [
-                        response.forecasts.uv.days[whichday].entries[start_time].scale,
-                        response.forecasts.uv.days[whichday].entries[start_time+1].scale,
-                        response.forecasts.uv.days[whichday].entries[start_time+2].scale
+                        response.forecasts.uv.days[whichday].entries[uv_time].scale,
+                        response.forecasts.uv.days[whichday].entries[uv_time+1].scale,
+                        response.forecasts.uv.days[whichday].entries[uv_time+2].scale
                     ],
                     'sunrise_firstlight': response.forecasts.sunrisesunset.days[whichday].entries[0].firstLightDateTime,
                     'sunrise': response.forecasts.sunrisesunset.days[whichday].entries[0].riseDateTime,
@@ -266,13 +281,11 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
                 
             data.push(data_selection);
             ++done;
-            console.log ({done});
+            //console.log ({done});
             }
         }).done(function(response){
-            //console.log(response.location.name + ' IS finished')
             gotData=true;
-            //console.log(data_selection);
-            if (done==beacharray.length-1){
+            if (done==id_list.length-1){
                 //console.log("do callback now");
                 callback(data);
             }                              
