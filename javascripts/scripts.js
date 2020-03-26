@@ -1,6 +1,9 @@
 
 $(document).ready(function() {
 
+var glwhichDay=0; // Day to extract data for each timeslot,  0 =today, 1=tomorrow 
+var glAbility='beginner';
+
     $(document).foundation();
 
     $("#search-btn").on("click", function() {
@@ -15,5 +18,49 @@ $(document).ready(function() {
         alert("Hi");
     });
 
+    function getHourNow(){
+        var hournow=moment().format('HH');
+        return hournow;
+
+    }
+
+    function getWhichDayindex(hour=6, whenInput='morning'){
+        var when = whenInput;
+        var whichDayIndex = 0;
+
+        switch (when){
+            case 'morning':
+                if (hour>8) whichDayIndex = 1;
+                break;   
+            case 'midday':
+                if (hour>13) whichDayIndex=1;
+                break;
+            case 'afternoon':
+                if (hour > 17) whichDayIndex=1;
+                break;
+            case 'default':
+                break;    
+        }
+        return whichDayIndex;
+
+    }
+
+
+    $('#when').on('change',function(event){
+        var when = event.target.value;
+        //console.log(when);
+        var hrnow=getHourNow();
+        var whichDayIndex= getWhichDayindex(hrnow,when);
+        //console.log({whichDayIndex});      
+        glwhichDay=whichDayIndex;
+
+
+    });
+
+    $('#ability').on('change',function(event){
+        var thisAbility=event.target.value;
+        glAbility=thisAbility;
+        console.log(glAbility);
+    })
 
 });

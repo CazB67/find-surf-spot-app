@@ -213,19 +213,22 @@
     
     <div class="row">
       <div class="medium-3 small-12 columns">
-        <p>Weather warnings:</p>
-        <p>Swell direction</p>
-        <p>Swell size:</p>
-        <p>Wind direction:</p>
-        <p>Wind direction:</p>
+        <p id='warnings'>Weather warnings:</p>
+        <p id='precis'>Summary:</p>
+        <p id='swell-direction'>Swell direction:</p>
+        <p id='swell-size'>Swell size:</p>
+        <p id='swell-period'>Swell period:</p>
+        <p id='wind-strength'>Wind strength:</p>
+        <p id='wind-direction'>Wind direction:</p>
       </div>
       
       <div class="medium-3 small-12 columns">
-          <p>Temperature:</p>
-          <p>UV Index:</p>
-          <p>Tide times:</p>
-          <p>Sunrise:</p>
-          <p>Sunset:</p>
+          <p id='temp'>Temperature:</p>
+          <p id='uv'>UV Index:</p>
+          <p id='high-tide'>High tide is at:</p>
+          <p id='low-tide'>Low tide is at:</p>
+          <p id='sunrise-time'>Sunrise is at:</p>
+          <p id='sunset-time'>Sunset is at:</p>
       </div>
 
       <div class="medium-6 small-12 columns text-center" id="map_canvas">
@@ -257,7 +260,7 @@
   </div>
   
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <!--<script src = "javascripts/api_scripts.js"></script>-->
+    <script src = "javascripts/api_scripts.js"></script>
     <script src = "javascripts/scripts.js"></script>
 
   </body>
