@@ -11,8 +11,6 @@
     font-family: 'Kalam', cursive;
 }
 
- 
-
 h1, h3, h4 {
     font-family: 'Rock Salt', cursive;
 }
@@ -21,17 +19,6 @@ h1, h3, h4 {
     
     background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
     color: #ffffff;
-}
-
-#footer{
-    height: 60px;
-    bottom: 0px;
-    left: 0px;
-    line-height: 50px;
-    color: #ffffff;
-    text-align: center;
-    width: 100%;
-    background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
 }
 
 .translucent-form-overlay {
@@ -50,13 +37,35 @@ h1, h3, h4 {
       padding-bottom: 10px;
   }
   
+   /* To keep google map responsive*/
   iframe {
     max-width:100%
   }
 
+  /* Decorative water apended to bottom of form*/
   .surf-img {
       height: 30px;
       background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
       width: 100%;
   }
+
+  /* Horizontally centres modal*/
+  @media print, screen and (min-width: 40em) {
+    #exampleModal1{
+      height: 400px;
+      width: 600px;
+      left: 50% !important;
+      transform: translatex(-50%);
+    }
+  }
   
+  #footer{
+    height: 60px;
+    bottom: 0px;
+    left: 0px;
+    line-height: 50px;
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+    background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
+}
