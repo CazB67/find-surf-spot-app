@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-      <link rel = "stylesheet" href = "https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+      <link rel = "stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/css/foundation-float.min.css">
+      <link rel = "stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/css/foundation-prototype.min.css">
+      <link rel = "stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/css/foundation-rtl.min.css">
+      <link rel = "stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/css/foundation.min.css">
       <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
       <link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Kalam|Rock+Salt&display=swap">
       <link rel = "stylesheet" href = "style.css"/> 
-      
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation-essential/6.2.2/js/vendor/jquery.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.core.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/foundation.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.reveal.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.touch.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.triggers.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.keyboard.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.mediaQuery.min.js"></script>
-      <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.motion.min.js"></script>
       
     <title>Find Surf Spot</title>
   </head>
@@ -55,16 +48,23 @@
       <hr>
     </div>
 
-     <!-- Start form and input information on left hand side -->
-     <div class="row">
-      <div class="medium-12 small-12 columns">
-        <h3>Search Surf Spots</h3>
+      <!-- Start form and input information on left hand side -->
+      <div class="row">
+        <div class="medium-4 small-12 columns">
+          <h4>Search Surf Spots</h4>
+          <br>
+        </div>
+
+      <!--Results Title-->
+      <div class="medium-8 small-12 columns hide">
+        <h4>Results</h4>
         <br>
       </div>
     </div>
 
-    <div class="row ">
-      <div class="medium-5 columns form">
+    <!--Start of form-->
+    <div class="row">
+      <div class="medium-4 columns form">
         
         <div class="translucent-form-overlay ">
           <form>
@@ -101,29 +101,301 @@
       <!-- End of form and input information on left hand side -->
 
     <!-- Start of results info on right hand side -->
-    <div class="medium-7 columns hide">
-      <h3>Results</h3>-->
-      <!-- Start of images holding results -->
-      <div class="row small-up-2 medium-up-3 large-up-3">
-        <div class="column column-block results">
-          <img src="https://placehold.it/150x150" class="thumbnail" alt="">
+    <div class="medium-8 columns hide">
+      
+      
+      <ul class="tabs" data-tabs id="example-tabs">
+        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Scarbourough Beach</a></li>
+        <li class="tabs-title"><a data-tabs-target="panel2" href="#panel2">Beach 2</a></li>
+        <li class="tabs-title"><a data-tabs-target="panel3" href="#panel3">Beach 3</a></li>
+        <li class="tabs-title"><a data-tabs-target="panel4" href="#panel4">Beach 4</a></li>
+        <li class="tabs-title"><a data-tabs-target="panel5" href="#panel5">Beach 5</a></li>
+      </ul>
+      
+      <div class="tabs-content" data-tabs-content="example-tabs">
+        <div class="tabs-panel is-active" id="panel1">
+          
+          <div class="row">
+            <div class="medium-12 small-12 columns">
+              <h5>Scarborough Beach</h5>
+              <br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="medium-4 small-12 columns">
+              <p id='warnings'>Weather warnings:</p>
+              <p id='precis'>Summary:</p>
+              <p id='swell-direction'>Swell direction:</p>
+              <p id='swell-size'>Swell size:</p>
+              <p id='swell-period'>Swell period:</p>
+              <p id='wind-strength'>Wind strength:</p>
+              <p id='wind-direction'>Wind direction:</p>
+            </div>
+            
+            <div class="medium-4 small-12 columns">
+                <p id='temp'>Temperature:</p>
+                <p id='uv'>UV Index:</p>
+                <p id='high-tide'>High tide is at:</p>
+                <p id='low-tide'>Low tide is at:</p>
+                <p id='sunrise-time'>Sunrise is at:</p>
+                <p id='sunset-time'>Sunset is at:</p>
+            </div>
+      
+            <div class="medium-4 small-12 columns text-center" id="map_canvas">
+              <iframe
+                width="400"
+                height="300"
+                frameborder="0" style="border:1"
+                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+              </iframe>
+            </div>
+          </div>
+
         </div>
-        <div class="column column-block results">
-          <img src="https://placehold.it/150x150" class="thumbnail" alt="">
+        <div class="tabs-panel" id="panel2">
+
+          <div class="row">
+            <div class="medium-12 small-12 columns">
+              <h4>Beach 2</h4>
+              <br>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="medium-4 small-12 columns">
+              <p id='warnings'>Weather warnings:</p>
+              <p id='precis'>Summary:</p>
+              <p id='swell-direction'>Swell direction:</p>
+              <p id='swell-size'>Swell size:</p>
+              <p id='swell-period'>Swell period:</p>
+              <p id='wind-strength'>Wind strength:</p>
+              <p id='wind-direction'>Wind direction:</p>
+            </div>
+            
+            <div class="medium-4 small-12 columns">
+                <p id='temp'>Temperature:</p>
+                <p id='uv'>UV Index:</p>
+                <p id='high-tide'>High tide is at:</p>
+                <p id='low-tide'>Low tide is at:</p>
+                <p id='sunrise-time'>Sunrise is at:</p>
+                <p id='sunset-time'>Sunset is at:</p>
+            </div>
+      
+            <div class="medium-4 small-12 columns text-center" id="map_canvas">
+              <iframe
+                width="400"
+                height="300"
+                frameborder="0" style="border:1"
+                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+              </iframe>
+            </div>
+          </div>
+
         </div>
-        <div class="column column-block results">
-          <img src="https://placehold.it/150x150" class="thumbnail" alt="">
+
+        <div class="tabs-panel" id="panel3">
+        <div class="row">
+          <div class="medium-12 small-12 columns">
+            <h4>Beach 3</h4>
+            <br>
+          </div>
         </div>
-        <div class="column column-block results">
-          <img src="https://placehold.it/150x150" class="thumbnail" alt="">
+        
+        <div class="row">
+          <div class="medium-4 small-12 columns">
+            <p id='warnings'>Weather warnings:</p>
+            <p id='precis'>Summary:</p>
+            <p id='swell-direction'>Swell direction:</p>
+            <p id='swell-size'>Swell size:</p>
+            <p id='swell-period'>Swell period:</p>
+            <p id='wind-strength'>Wind strength:</p>
+            <p id='wind-direction'>Wind direction:</p>
+          </div>
+          
+          <div class="medium-4 small-12 columns">
+              <p id='temp'>Temperature:</p>
+              <p id='uv'>UV Index:</p>
+              <p id='high-tide'>High tide is at:</p>
+              <p id='low-tide'>Low tide is at:</p>
+              <p id='sunrise-time'>Sunrise is at:</p>
+              <p id='sunset-time'>Sunset is at:</p>
+          </div>
+    
+          <div class="medium-4 small-12 columns text-center" id="map_canvas">
+            <iframe
+              width="400"
+              height="300"
+              frameborder="0" style="border:1"
+              src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+            </iframe>
+          </div>
         </div>
-        <div class="column column-block results">
-          <img src="https://placehold.it/150x150" class="thumbnail" alt="">
-        </div>
-        <div class="column column-block results">
-          <img src="https://placehold.it/150x150" class="thumbnail" alt="">
-        </div>
+
       </div>
+
+      <div class="tabs-panel" id="panel4">
+        <div class="row">
+          <div class="medium-12 small-12 columns">
+            <h4>Beach 4</h4>
+            <br>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="medium-4 small-12 columns">
+            <p id='warnings'>Weather warnings:</p>
+            <p id='precis'>Summary:</p>
+            <p id='swell-direction'>Swell direction:</p>
+            <p id='swell-size'>Swell size:</p>
+            <p id='swell-period'>Swell period:</p>
+            <p id='wind-strength'>Wind strength:</p>
+            <p id='wind-direction'>Wind direction:</p>
+          </div>
+          
+          <div class="medium-4 small-12 columns">
+              <p id='temp'>Temperature:</p>
+              <p id='uv'>UV Index:</p>
+              <p id='high-tide'>High tide is at:</p>
+              <p id='low-tide'>Low tide is at:</p>
+              <p id='sunrise-time'>Sunrise is at:</p>
+              <p id='sunset-time'>Sunset is at:</p>
+          </div>
+    
+          <div class="medium-4 small-12 columns text-center" id="map_canvas">
+            <iframe
+              width="400"
+              height="300"
+              frameborder="0" style="border:1"
+              src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tabs-panel" id="panel3">
+        <div class="row">
+          <div class="medium-12 small-12 columns">
+            <h4>Beach 3</h4>
+            <br>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="medium-4 small-12 columns">
+            <p id='warnings'>Weather warnings:</p>
+            <p id='precis'>Summary:</p>
+            <p id='swell-direction'>Swell direction:</p>
+            <p id='swell-size'>Swell size:</p>
+            <p id='swell-period'>Swell period:</p>
+            <p id='wind-strength'>Wind strength:</p>
+            <p id='wind-direction'>Wind direction:</p>
+          </div>
+          
+          <div class="medium-4 small-12 columns">
+              <p id='temp'>Temperature:</p>
+              <p id='uv'>UV Index:</p>
+              <p id='high-tide'>High tide is at:</p>
+              <p id='low-tide'>Low tide is at:</p>
+              <p id='sunrise-time'>Sunrise is at:</p>
+              <p id='sunset-time'>Sunset is at:</p>
+          </div>
+    
+          <div class="medium-4 small-12 columns text-center" id="map_canvas">
+            <iframe
+              width="400"
+              height="300"
+              frameborder="0" style="border:1"
+              src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tabs-panel" id="panel4">
+        <div class="row">
+          <div class="medium-12 small-12 columns">
+            <h4>Beach 4</h4>
+            <br>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="medium-4 small-12 columns">
+            <p id='warnings'>Weather warnings:</p>
+            <p id='precis'>Summary:</p>
+            <p id='swell-direction'>Swell direction:</p>
+            <p id='swell-size'>Swell size:</p>
+            <p id='swell-period'>Swell period:</p>
+            <p id='wind-strength'>Wind strength:</p>
+            <p id='wind-direction'>Wind direction:</p>
+          </div>
+          
+          <div class="medium-4 small-12 columns">
+              <p id='temp'>Temperature:</p>
+              <p id='uv'>UV Index:</p>
+              <p id='high-tide'>High tide is at:</p>
+              <p id='low-tide'>Low tide is at:</p>
+              <p id='sunrise-time'>Sunrise is at:</p>
+              <p id='sunset-time'>Sunset is at:</p>
+          </div>
+    
+          <div class="medium-4 small-12 columns text-center" id="map_canvas">
+            <iframe
+              width="400"
+              height="300"
+              frameborder="0" style="border:1"
+              src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tabs-panel" id="panel5">
+        <div class="row">
+          <div class="medium-12 small-12 columns">
+            <h4>Beach 5</h4>
+            <br>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="medium-4 small-12 columns">
+            <p id='warnings'>Weather warnings:</p>
+            <p id='precis'>Summary:</p>
+            <p id='swell-direction'>Swell direction:</p>
+            <p id='swell-size'>Swell size:</p>
+            <p id='swell-period'>Swell period:</p>
+            <p id='wind-strength'>Wind strength:</p>
+            <p id='wind-direction'>Wind direction:</p>
+          </div>
+          
+          <div class="medium-4 small-12 columns">
+              <p id='temp'>Temperature:</p>
+              <p id='uv'>UV Index:</p>
+              <p id='high-tide'>High tide is at:</p>
+              <p id='low-tide'>Low tide is at:</p>
+              <p id='sunrise-time'>Sunrise is at:</p>
+              <p id='sunset-time'>Sunset is at:</p>
+          </div>
+    
+          <div class="medium-4 small-12 columns text-center" id="map_canvas">
+            <iframe
+              width="400"
+              height="300"
+              frameborder="0" style="border:1"
+              src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+    
     </div>
     <!-- End of results info on right hand side -->
 
@@ -201,45 +473,6 @@
      </div>
     </div>
   </div>
-    
-    <!-- Start of specific beach info -->
-    <hr>
-    <div class="row">
-      <div class="medium-12 small-12 columns">
-        <h3>Scarborough Beach</h3>
-        <br>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="medium-3 small-12 columns">
-        <p id='warnings'>Weather warnings:</p>
-        <p id='precis'>Summary:</p>
-        <p id='swell-direction'>Swell direction:</p>
-        <p id='swell-size'>Swell size:</p>
-        <p id='swell-period'>Swell period:</p>
-        <p id='wind-strength'>Wind strength:</p>
-        <p id='wind-direction'>Wind direction:</p>
-      </div>
-      
-      <div class="medium-3 small-12 columns">
-          <p id='temp'>Temperature:</p>
-          <p id='uv'>UV Index:</p>
-          <p id='high-tide'>High tide is at:</p>
-          <p id='low-tide'>Low tide is at:</p>
-          <p id='sunrise-time'>Sunrise is at:</p>
-          <p id='sunset-time'>Sunset is at:</p>
-      </div>
-
-      <div class="medium-6 small-12 columns text-center" id="map_canvas">
-        <iframe
-          width="400"
-          height="300"
-          frameborder="0" style="border:1"
-          src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q=Scarborough+Beach">
-        </iframe>
-      </div>
-    </div>
 
     <!-- Blockquote -->
     <div class="row">
@@ -258,7 +491,15 @@
     </div>
 
   </div>
-  
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation-essential/6.2.2/js/vendor/jquery.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.core.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/foundation.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.reveal.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.touch.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.triggers.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.keyboard.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.mediaQuery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.1/js/plugins/foundation.util.motion.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src = "javascripts/api_scripts.js"></script>
     <script src = "javascripts/scripts.js"></script>

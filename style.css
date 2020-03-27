@@ -3,16 +3,16 @@
     height: 3em;
 }
 
-.card {
-    background-color: #ffffff;
-}
-
 .container {
     font-family: 'Kalam', cursive;
 }
 
-h1, h3, h4 {
+h1, h3, h4, h5 {
     font-family: 'Rock Salt', cursive;
+}
+
+p {
+  font-size: 12pt;
 }
 
 .background-image {
