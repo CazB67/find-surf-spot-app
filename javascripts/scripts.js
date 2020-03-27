@@ -127,7 +127,8 @@ var gldataReady=false;
         
         //Gets the data from the WW API and puts it into the global variable
         getDataFromWW(ww_ids,moment(),glwhichDay,glStartHr,updateGlobal);
-         
+        var warnings=getWarningsData(gotWarnings); 
+        
         //Checks whether any data has been received in the global variable
         wwtimerObj=setInterval(function () {
             checkForData()
