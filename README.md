@@ -3,7 +3,7 @@ Project 1
 
 ## Description
 
-Forcast Websites are difficult to interpret and read. It is difficult to know where the best place to surf will be based on the conditions and a person's surfing ability. Thus a web application that uses Willy Weather API to recommend best surf sports in the Perth metropolitan area has been developed.
+Forecast Websites are difficult to interpret and read. It is difficult to know where the best place to surf will be based on the conditions and a person's surfing ability. Thus a web application that uses Willy Weather API to recommend best surf sports in the Perth metropolitan area has been developed.
 
 ## Table of Contents
 
@@ -12,19 +12,25 @@ Forcast Websites are difficult to interpret and read. It is difficult to know wh
 3. [Installation](#Installation)
 4. [APIs used](#APIs-used)
 5. [Technologies used](#Technologies-used)
-6. [Usage](#Usage)
-3. [Credits](#Credits)
-3. [Licence](#License)
-3. [Authors](#Authors)
+6. [Breakdown of roles](#Breakdown-of-roles)
+7. [Challenges](#Challenges)
+8. [Successes](#Successes)
+9. [Usage](#Usage)
+10. [Credits](#Credits)
+11. [Licence](#License)
+12. [Authors](#Authors)
 
 ## User Story 
 
+```
 AS A user wanting to surf
 I WANT to search for the best surf spots
 So that I can plan where to surf depending on the weather conditions and my ability
+```
 
 ## Acceptance Criteria
 
+```
 GIVEN I am using the **Find Surf Spot** application to refer me to a beach location
 WHEN I first arrive at the webpage, I select my level of ability.
 THEN I can provide my geolocation, or select sites near my current location.
@@ -42,6 +48,7 @@ THEN I am presented with the following information about that spot:
 - Tide times
 - Sunrise/sunset times
 - Google map of beach location
+```
 
 ## Installation
 
@@ -90,6 +97,7 @@ This has been deployed to the URLs
 
 When you click on the link of the web application you are directed to the webpage of the deployed application. The following animation demonstrates the application functionality.
 
+![Find Surf Spot Application]( .gif)
 
 
 ## Credits
