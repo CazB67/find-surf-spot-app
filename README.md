@@ -7,7 +7,7 @@ Forcast Websites are difficult to interpret and read Difficult to know what the 
 
 # Table of Contents
 
-1. [UserStory](##User-Story)
+1. [User Story](#User-Story)
 2. [Example2](#example2)
 3. [Third Example](#third-example)
 
