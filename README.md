@@ -2,8 +2,11 @@
 Project 1
 
 ## Description
+
 Forcast Websites are difficult to interpret and read Difficult to know what the best place to surf will be based on the conditions
   
+
+## User Story 
 
 AS A user wanting to surf
 I WANT to search for the best surf spots

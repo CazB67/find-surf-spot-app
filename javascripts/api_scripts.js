@@ -127,6 +127,61 @@ function getUniqueIDs(beacharray){
     return ids;
 }
 
+function makewwWarningsURL(){
+    //this provides all warnings for the state. 
+    // Marine Wind weather warnings = "code": "IDW20100"
+    // Marine warning = "code": "IDW11160"
+    // Also relevant, surf & tsunami but I don't know these codes
+    return 'https://cors-anywhere.herokuapp.com/https://api.willyweather.com.au/v2/ZWZjODA2NGIyMGQxZThjYmZmNzE3Mz/states/7/warnings.json'
+}
+
+function gotWarnings(data){
+    console.log('Callback - got warnings.');
+    console.log({data})
+}
+
+function getWarningsData(callback){
+    var queryURL=makewwWarningsURL();
+    var data;
+    $.ajax({
+        url: queryURL,
+        method: 'GET',
+        success: function(response){
+            console.log('success');
+            console.log(response);
+            data = filterWarnings(response);
+            callback(data);
+        },
+        error: function(){}
+    }).done(function(response){
+        console.log('Warnings all done'); 
+    });
+};
+
+
+function filterWarnings(dataObj){
+    const relevant_codes=['IDW20100','IDW11160','IDW21033','IDW21034','IDW21035','IDW21037','IDW21038','IDW23100','IDW23200','IDW23300','IDW24000','IDW24010','IDW24020',
+                            'IDW24100','IDW24200','IDW24300']
+    var LancelinWarnings=[];
+    var PerthWarnings=[];
+    
+    $.each(dataObj,function(index){
+        if(!relevant_codes.includes(dataObj[index].code)){
+            return [];
+        };
+        var warningText= dataObj[index].content.html;
+        if(warningText.indexOf('Lancelin')>=0) {
+            console.log ('found relevant Lancelin warnings');
+            LancelinWarnings=LancelinWarnings.push(warningText) ;
+        } else if (warningText.indexOf('Perth')>=0 ){
+            console.log ('found relevant Perth warnings');
+            PerthWarnings=PerthWarnings.push(warningText);
+        }
+    });
+    var data={LancelinWarnings,PerthWarnings};
+    return data;
+};
+
 function makewwURL(location='',start_date=Date()){
     if (location!== ''){
         var searchlocn = location;
