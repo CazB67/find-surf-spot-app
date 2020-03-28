@@ -6,15 +6,13 @@ Project 1
 Forcast Websites are difficult to interpret and read Difficult to know what the best place to surf will be based on the conditions
 
 # Table of Contents
-1. [User Story](##User Story)
+1. [UserStory](##User Story)
 2. [Example2](#example2)
 3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
 
 
 ## Example2
 ## Third Example
-## [Fourth Example](http://www.fourthexample.com)
   
 
 ## User Story 
