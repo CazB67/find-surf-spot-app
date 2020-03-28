@@ -3,18 +3,19 @@ Project 1
 
 ## Description
 
-Forcast Websites are difficult to interpret and read Difficult to know what the best place to surf will be based on the conditions
+Forcast Websites are difficult to interpret and read. It is difficult to know where the best place to surf will be based on the conditions and a person's surfing ability. Thus a web application that uses Willy Weather API to recommend best surf sports in the Perth metropolitan area has been developed.
 
-# Table of Contents
+## Table of Contents
 
 1. [User Story](#User-Story)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-
-
-## Example2
-## Third Example
-  
+2. [Acceptance Criteria](#Acceptance-Criteria)
+3. [Installation](#Installation)
+4. [APIs used](#APIs-used)
+5. [Technologies used](#Technologies-used)
+6. [Usage](#Usage)
+3. [Credits](#Credits)
+3. [Licence](#License)
+3. [Authors](#Authors)
 
 ## User Story 
 
@@ -28,7 +29,7 @@ GIVEN I am using the **Find Surf Spot** application to refer me to a beach locat
 WHEN I first arrive at the webpage, I select my level of ability.
 THEN I can provide my geolocation, or select sites near my current location.
 WHEN I choose when I want to surf: 6-9am, 11-2pm or 3-6pm.
-THEN I am shown a list of suitable surf spots (by name or picture), in an ordered list based on their proximity to me.
+THEN I am shown a list of suitable surf spots based on their proximity to me.
 WHEN I click on a surf spot in the list
 THEN I am presented with the following information about that spot:
 
@@ -40,6 +41,7 @@ THEN I am presented with the following information about that spot:
 - Weather conditions (temperature, UV index)
 - Tide times
 - Sunrise/sunset times
+- Google map of beach location
 
 ## Installation
 
@@ -55,12 +57,36 @@ THEN I am presented with the following information about that spot:
 - Foundation CSS Framework
 - Agile software development (Kanban)
 
+### Breakdown of roles
+#### Jo (Chief Technical Officer)
+- Code architecture
+- API familiarisation
+
+#### Miles (Product Manager)
+- Research into surf spots
+- Structure to base weather predictions
+
+#### Caroline (Front End Developer)
+- Website layout via Foundation Framework
+- Website design
+
+### Challenges
+- Willy Weather API CORS issues
+- Accurately using muliple weather variables to predict where the best surf will be 
+- Using modals to display API data 
+
+### Successes
+- Developing a viable and useful product
+- Successful use of Foundation CSS Framework
+- Using API data to predict best places to surf
+
+
 ## Usage
 This has been deployed to the URLs 
 
 * The URL of the deployed application is https://cazb67.github.io/find-surf-spot-app/
 
-* The URL of the GitHub repository is 
+* The URL of the GitHub repository is https://github.com/CazB67/find-surf-spot-app
 
 When you click on the link of the web application you are directed to the webpage of the deployed application. The following animation demonstrates the application functionality.
 
@@ -70,7 +96,28 @@ When you click on the link of the web application you are directed to the webpag
 * Team at UWA Coding Bootcamp
 
 ## License
+MIT License
+
+Copyright (c) [2020] [Caroline Bates, Miles Galli, Joanna Sikorska]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ## Authors
 
-Miles, Joanna and Caroline
+Miles Galli, Joanna Sikorska and Caroline Bates
