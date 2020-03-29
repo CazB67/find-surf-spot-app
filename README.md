@@ -16,9 +16,10 @@ Forecast Websites are difficult to interpret and read. It is difficult to know w
 7. [Challenges](#Challenges)
 8. [Successes](#Successes)
 9. [Usage](#Usage)
-10. [Credits](#Credits)
-11. [Licence](#License)
-12. [Authors](#Authors)
+10. [Directions for Future Development](#directions-for-future-development)
+11. [Credits](#Credits)
+12. [Licence](#License)
+13. [Authors](#Authors)
 
 ## User Story 
 
@@ -33,8 +34,8 @@ So that I can plan where to surf depending on the weather conditions and my abil
 ```
 GIVEN I am using the **Find Surf Spot** application to refer me to a beach location
 WHEN I first arrive at the webpage, I select my level of ability.
-THEN I can provide my geolocation, or select sites near my current location.
-WHEN I choose when I want to surf: 6-9am, 11-2pm or 3-6pm.
+THEN I choose when I want to surf: 6-9am, 11-2pm or 3-6pm.
+WHEN I click search,
 THEN I am shown a list of suitable surf spots based on their proximity to me.
 WHEN I click on a surf spot in the list
 THEN I am presented with the following information about that spot:
@@ -66,16 +67,19 @@ THEN I am presented with the following information about that spot:
 
 ### Breakdown of roles
 #### Jo (Chief Technical Officer)
-- Code architecture
+- Code architecture - on click events to store user responses, conditonal statements, select locations based on date (i.e. season), conditions and user inputs, call relevant APIs and extract data, render data to the screen
 - API familiarisation
 
 #### Miles (Product Manager)
 - Research into surf spots
-- Structure to base weather predictions
+- Develop structure to base weather predictions
+- Source and acquire permission for photos, Kanban, create presentation using Canva
 
 #### Caroline (Front End Developer)
 - Website layout via Foundation Framework
 - Website design
+- Familiarisation with Google Maps Embed API and how it works to displays map on page
+- Learn how to use the various Foundation CSS Framework fearures and how to make them function with javascript eg reveal
 
 ### Challenges
 - Willy Weather API CORS issues
@@ -86,7 +90,6 @@ THEN I am presented with the following information about that spot:
 - Developing a viable and useful product
 - Successful use of Foundation CSS Framework
 - Using API data to predict best places to surf
-
 
 ## Usage
 This has been deployed to the URLs 
@@ -99,6 +102,9 @@ When you click on the link of the web application you are directed to the webpag
 
 ![Find Surf Spot Application]( .gif)
 
+## Directions for Future Development
+- Expand to include other regions of Western Australia
+- Expand to view forecasts for a greater time period
 
 ## Credits
 * Team at UWA Coding Bootcamp
