@@ -107,25 +107,57 @@ $(document).ready(function() {
     },
     {
         location: 'Hillarys Marina',
-        ww_locn: 'Hillarys Marina',
+        ww_locn: 'Hillarys+Marina',
         ww_id: 19546,
         lat: -31.823,
         lng:  115.733,
         postcode: '6025'
     }
     ];
+const dummyLocations = [
+    {
+        location: 'Beginners Beach',
+        ww_locn: 'Cottesloe Beach',
+        ww_id: 0,
+        lat: -31.823,
+        lng:  115.733,
+        postcode: '6025'
+    },
+    {
+        location: 'Intermediate Beach',
+        ww_locn: 'Scarborough Beach',
+        ww_id: 0,
+        lat: -31.823,
+        lng:  115.733,
+        postcode: '6025'
+    },
+    {
+        location: 'Advanced Beach',
+        ww_locn: 'Lancelin Beach',
+        ww_id: 0,
+        lat: -31.823,
+        lng:  115.733,
+        postcode: '6025'
+    }
+    ]
 
     var glwhichDay=0; // Day to extract data for each timeslot,  0 =today, 1=tomorrow 
     var glAbility='beginner';
     var glStartHr=6;
     var glData=[];
+    var glSpotsData=[];
 
     var gldataReady=false;
+    var haveSpots=false;
+    var haveWarnings=false;
+    var glWarningsData=[];
+
+    var includeDummyData=true;
 
     $(document).foundation();
     
 
-    var elem = new Foundation.Tabs($('#results_tabs'));
+    //var elem = new Foundation.Tabs($('#results_tabs'));
 
     
 
@@ -135,15 +167,11 @@ $(document).ready(function() {
         console.log(glData);
     };
 
-    //Results on click event
-    $(".results").on("click", function(event) {
-        alert("Hi");
-    });
-
+    
     function getHourNow(){
         var hournow=moment().format('HH');
         return hournow;
-    }
+    };
 
     // determine from which day to extract data 
     function getWhichDayindex(hour=6, whenInput='morning'){
@@ -166,119 +194,442 @@ $(document).ready(function() {
         return whichDayIndex;
     };
 
-    // determines the list of surfable conditions
-    function getSurfabilityArray(dataObj) {
+    function addDummyDataToDataset(dataObj){
+        
+        var dataset=dataObj;
+        var newdata=getDummyData();
+        dataset=dataset.concat(newdata);
+        
+        return dataset;    
+    }
 
-        var unsurfable=1.0;
+    // determines the list of surfable conditions
+    function getSurfabilityArray(origDataObj,level) {
+        
+        var dataObj=origDataObj;
+
+        /* if(includeDummyData === true){
+            dataObj=addDummyDataToDataset(origDataObj);
+        }; */
+
+        console.log(dataObj);
+
+        const unsurfable=1.5;  //waveheight
+        const beginner_max = 2.0;
+        const intermediate_max=4.0;
+         
         var surfable=false;
         var surfableArray=[];
         var isWindOK=false;
         var isWindDirOK=false;
-        var isSwellOK=false;
+        var isSwellOK=true;
         // check wind direction (SW, S or W, NW above 15knots = 28km/hr means not surfable)
         $.each(dataObj,function(index){
             
             //Check wind direction
             var wind_directions=dataObj[index].wind_direction_texts;
-            const poorwindsDirections=['S'];
-            //['S','SSW','SW','WSW','W'];
+            const poorwindsDirections=['S','SSW','SW','WSW','W'];
 
             if(poorwindsDirections.indexOf(wind_directions[0])<0 && poorwindsDirections.indexOf(wind_directions[1])<0 && poorwindsDirections.indexOf(wind_directions[2])<0){
                     isWindDirOK=true;
             };
             
-            //Check wind speed
+            //Check wind speed (<15 knots or 27.78 km/hr)
             if (dataObj[index].wind_speeds[0]<28){
                 isWindOK=true;
-            };          
+            };    
 
             //check swell max height(<1.5m means not surfable)
-            if(dataObj[index].swell_heights[2]>unsurfable){
-                isSwellOK=true
+            //Maximum height depends on level
+            var swell_height=dataObj[index].swell_heights[2];
+            console.log({swell_height});
+            if(swell_height<unsurfable){
+                isSwellOK=false;
+            } else if (level === 'beginner' && swell_height > beginner_max) {
+                isSwellOK=false;
+            } else if (level === 'intermediate' && swell_height > intermediate_max) {
+                isSwellOK=false;
+            } else {
+                isSwellOK=true;
             };
-
+            
             //Surfable assessment
             if(isWindDirOK && isWindOK && isSwellOK){
                 surfable=true;
-            };
+            } else surfable=false;
             surfableArray.push(surfable);
         })
         return surfableArray;
     };
 
-    function getSurfSpotList(dataObj){
-        var okspots=getSurfabilityArray(dataObj);
+    function getSurfSpotList(origDataObj){
+
+        var dataObj=origDataObj;
+        var beachdata=ww_ids;
+
+        if(includeDummyData === true){
+            dataObj=addDummyDataToDataset(origDataObj);
+            beachdata=ww_ids.concat(dummyLocations);
+        };
+
+        var okspots=getSurfabilityArray(dataObj,glAbility);  //array of true/false values
+        
+       
         var spotsList=[];
-        //console.log({okspots});
-        //console.log({dataObj});
-       // console.log({ww_ids});
+
+        console.log ({beachdata});
 
         $.each(okspots,function(index){
-            if (okspots[index]===true){
-                var theWWid=dataObj[index].ww_id;
-                console.log({theWWid});
-
-                $.each(ww_ids,function(i){
-                    console.log({i});
-                    
-                    if (ww_ids[i].ww_id === theWWid){
-                        //add data - matching id found
-                        var newData=dataObj[index];
-                        var newname=ww_ids[i].location;
-                        console.log(newData);
-                        console.log(newname);
-                        //console.log ('Old name=' + newData.ww_name);
-                        //console.log('New name: ' + ww_ids[i].location);
-
-                        newData.new_name= newname;
-
-                        spotsList.push(newData);
-                        
+            if (okspots[index]===true){            // data to be included 
+                var dataRecordToInclude= dataObj[index];
+                dataRecordToInclude.beach_name='';
+               // console.log({dataRecordToInclude});
+                var theWWid=dataRecordToInclude.ww_id;  //get the data corresponding to the true/false element in okspots
+                
+                if(theWWid !==0){
+                    var options = $.grep(beachdata,function(element,k){
+                                        return element.ww_id===theWWid
+                                    },false);
+                   // console.log({options})
+                    for (var thisIndex=0; thisIndex<options.length; thisIndex++) {
+                        console.log(options[thisIndex].location);
+                        spotsList.unshift(dataRecordToInclude);
+                        spotsList[0].beach_name=options[thisIndex].location;
+                        console.log(spotsList);
                     };
-                }) 
+                } else { // dummydata with ww_id===0
+                     //console.log({dataRecordToInclude});
+                    spotsList.unshift(dataRecordToInclude);
+                    spotsList[0].beach_name=spotsList[0].ww_name;
+                };
     
             }
             
         })
+        console.log({spotsList});
         return spotsList;
     }
     
+    
 
-    function getDesiredSurfSpotInfo (){
-        //join with the actual beaches
+    function hideCarousel(){
+
+        $('#picture_carousel').css('visibility','hidden');
+    };
+
+    function showCarousel(){
+        $('#picture_carousel').css('visibility','visible');
+    };
+
+    function addGettingDataMsg(msgheader='Looking for your surf spot recommendations now', themsg="This shouldn't take too long. Thanks for waiting.") {
+
+        var newpanel=$('#results_contents');
+
+        var newmsghdr = $('<h5>');
+        newmsghdr.attr('class','message_header')
+        newmsghdr.text(msgheader);
+        newpanel.append(newmsghdr);
+
+        var newmsg = $('<p>');
+        newmsg.attr('class','message_header')
+        newmsg.text(themsg);
+        newpanel.append(newmsg);
+
     }
 
+    
+    function getWarningsText(warnings){
+        var warnings_text='';
+        var warn_length=warnings.length;
+        //console.log(warn_length);
+        
+        if (warnings.length===0) {
+            warnings_text= 'No relevant warnings have been issued by the BOM.';
+        } else if (warnings.length===1){
+           warnings_text=warnings[0];
+        } else {
+            $.each(warnings,function(index){
+                var thenum=index+1;
+                var thetext='<h5 class="warnings_subheader">Warning ' + thenum + '</h5><p>' + warnings[index] + '<br></p>'
+                warnings_text= warnings_text + thetext;
+            });
+        };
+
+        return warnings_text;
+    };
 
 
-    function createTabInfo (dataRecord, index, callback){
+    function getTideTimesText (tidalData,whichTide='high'){
+        var times='';
+        var tides=tidalData[0];
+        //console.log({tides});
+        $.each(tides,function(index){
+            if(tides[index].type===whichTide){
+                times=times + formatTime(tides[index].dateTime,'LT') + '<br>';
+            };
+        });
+        return times;
+    };
 
-        var newdiv=$('<div>');
-        newdiv.attr('class','tabs-content');
-        newdiv.attr('data-tabs-content','results_tabs');
-        $('#datatab_'+index).append(newdiv);
+    function renderSpotData (dataRecord, index, warnings){
+        
+        var warnings_text=getWarningsText(warnings);
+        var low_tide_text=getTideTimesText(dataRecord.tides,'low');
+        var high_tide_text=getTideTimesText(dataRecord.tides,'high');
+        // console.log({dataRecord});
+        // console.log({index});
 
-        var newpanel= $('<div>');
-        newpanel.attr('class','abs-panel is-active');
-        newpanel.attr('id','panel_'+ index);
-        newdiv.append(newpanel);
+        var newpanel=$('#results_contents');
 
-        var newrow = $('<div>');
-        newdiv.append(newrow);
-
-        var newcol=$('<div>');
-        newcol.attr('class','medium-12 small-12 columns');
-        newrow.append(newcol);
-
-        var newh = $('<h5>');
-        newh.prop('innerHTML', dataRecord.new_name + '<br>');
-        newrow.append(newh);
-            
-       
-        console.log('done with tabs');
-
+        if (newpanel.length) newpanel.empty();
         
 
+        var newcol=$('<div>');
+        newcol.attr('class','medium-12 small-12 columns beach_head_block');
+        newpanel.append(newcol);
+
+        var newh = $('<h4>');
+        newh.attr('class','beach_name')
+        newh.prop('innerHTML', dataRecord.beach_name + '');
+        newcol.append(newh);
+
+        var newh = $('<h5>');
+        newh.attr('class','warning_title')
+        newh.prop('innerHTML', 'Weather warnings:' + '');
+        newcol.append(newh);
+
+        var newp = $('<p>');
+        newp.attr('class','warning_text');
+        newp.prop('innerHTML',warnings_text);
+        newcol.append(newp);
+
+        var newr= $('<div>');
+        newr.attr('class','row_data');
+        newr.attr('id','datarow_'+ index);
+        newcol.append(newr);
+        
+        var newcol=$('<div>');
+        newcol.attr('class','medium-12 small-12 columns results beach_data_block');
+        newr.append(newcol);
+        
+        var newtable = $('<table>');
+        newtable.attr('class','hover striped stack res_table');
+        newtable.attr('id','tbl_l_'+ index);
+        newcol.append(newtable);
+
+        //Setup header for desired number of colums.  Header will not be shown.
+
+        var newhead = $('<thead>');
+        newtable.attr('class','results_table_header');
+        newtable.append(newhead);
+
+        var newtblcol= $('<th>');
+        newtblcol.attr('class','results_table_header_col');
+        newtblcol.attr('id','col1');
+        newhead.append(newtblcol);
+        var newtblcol= $('<th>');
+        newtblcol.attr('class','results_table_header_col');
+        newtblcol.attr('id','col2');
+        newhead.append(newtblcol);
+        var newtblcol= $('<th>');
+        newtblcol.attr('class','results_table_header_col');
+        newtblcol.attr('id','col3');
+        newhead.append(newtblcol);
+        var newtblcol= $('<th>');
+        newtblcol.attr('class','results_table_header_col');
+        newtblcol.attr('id','col4');
+        newhead.append(newtblcol);
+
+        
+        // Setup body
+        var newbody = $('<tbody>');
+        newbody.attr('class','results_table_header');
+        newtable.append(newbody);
+
+
+        //Setup contents of body with the data
+        var newtr=$('<tr>');
+        newtr.attr('class','results_table_row');
+        newbody.append(newtr);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Summary:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML','<p>' + dataRecord.precis_texts + '</p>');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Temperature:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML','<p>' + dataRecord.temperatures[1].toFixed(1) + ' °C </p>');
+        newtr.append(newtd);
+
+        var newtr=$('<tr>');
+        newtr.attr('class','results_table_row');
+        newbody.append(newtr);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Swell direction:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+
+        var uniqueData= unique(dataRecord.swell_direction_texts);
+        var swell_text=getSwellTextSummary(uniqueData);
+                    
+        newtd.prop('innerHTML', '<p>' + swell_text + '</p>');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('UV Index:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML','<p>' + dataRecord.uv_texts[1] + '</p>');
+        newtr.append(newtd);
+
+        var newtr=$('<tr>');
+        newtr.attr('class','results_table_row');
+        newbody.append(newtr);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Swell size:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML', '<p>' + dataRecord.swell_heights[1].toFixed(1)  + ' m </p>');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('High tide is at:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML','<p>'+ high_tide_text + '</p>');
+        newtr.append(newtd);
+        
+        var newtr=$('<tr>');
+        newtr.attr('class','results_table_row');
+        newbody.append(newtr);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Swell period:');
+        newtr.append(newtd);
+
+        //console.log(dataRecord.swell_periods[1]);
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML', '<p>' + dataRecord.swell_periods[1].toFixed(1)  + ' secs </p>');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Low tide is at:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML','<p>'+ low_tide_text + '</p>');
+        newtr.append(newtd);
+
+        var newtr=$('<tr>');
+        newtr.attr('class','results_table_row');
+        newbody.append(newtr);
+        
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Wind strength:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        var speedinkmphr=dataRecord.wind_speeds[1].toFixed(1);
+        var speedInKnots = (speedinkmphr * 0.539957).toFixed(1);
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML', '<p>' + speedInKnots  + ' knots </p>');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Sunrise is at:');
+        newtr.append(newtd);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML','<p>'+ formatTime(dataRecord.sunrise) + '</p>');
+        newtr.append(newtd);
+
+        var newtr=$('<tr>');
+        newtr.attr('class','results_table_row');
+        newbody.append(newtr);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Wind direction:');
+        newtr.append(newtd);
+
+        var uniqueData= unique(dataRecord.wind_direction_texts);
+        var wind_text=getSwellTextSummary(uniqueData);
+
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML', '<p>' + wind_text  + '</p>');
+        newtr.append(newtd);
+        
+        var newtd=$('<td>');
+        newtd.attr('class','results_rownames');
+        newtd.text('Sunset is at:');
+        newtr.append(newtd);
+
+        
+        var newtd=$('<td>');
+        newtd.attr('class','results_rowdata results_rowdata_p');
+        newtd.prop('innerHTML','<p>'+ formatTime(dataRecord.sunset) + '</p>');
+        newtr.append(newtd);
+        
+        //console.log(dataRecord.ww_name);
+        addMap(dataRecord.ww_name);
+       
+    };    
+
+
+    function addMap (location){
+        var map=$('#map_canvas');
+        console.log(map.length);
+        if (map.length) map.empty();
+
+        //console.log(location);
+        location=location.replace(' ','+');
+        var newiframe= $('<iframe>');
+        newiframe.attr('class','surfspotmap');
+        newiframe.prop('width','400');
+        newiframe.prop('height','300');
+        newiframe.prop('frameborder','0');
+        newiframe.prop('style','border:1');
+        newiframe.attr('src','https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q='+ location);
+        map.append(newiframe);
+    };
+
+    function formatTime(timestring,formatWanted='LT'){
+        return moment(timestring,'YYYY-MM-DD hh:mm:ss').format(formatWanted);
     }
+
     function unique(list){
         var result=[];
         $.each(list,function(j,e){
@@ -311,312 +662,100 @@ $(document).ready(function() {
     };
 
 
-    function createAllTabs (dataObj){
 
-        
-        var newTabObj=$('#results_tabs');
+    function createList (dataObj,callback){
+
+        //not tabs anymore
+        var newTabObj=$('#results_list');
         if (newTabObj.length) newTabObj.empty();
 
-        var newTabResultsObj=$('#results_tab_contents');
+        var newTabResultsObj=$('#results_contents');
         if (newTabResultsObj.length) newTabResultsObj.empty();
 
-        
-
         $.each(dataObj,function(index){
-
-            //<li class="tabs-title is-active">
-                //<a href="#panel1" aria-selected="true">Scarborough Beach</a></li>
+ 
             var newtab = $('<li>');
-            newtab.attr('class','tab-title');
-            newtab.attr('id','datatab_'+ index);
+            newtab.attr('class','list-item');
+            newtab.attr('id','listitem_'+ index.toString().padStart(2,0));
+            newtab.attr('value',index);
             newTabObj.append(newtab);
 
             var newA = $('<a>');
-            newA.attr('href','#panel'+ index);
-            newA.prop('innerHTML', dataObj[index].ww_name);
-            newA.attr('data-options','deep_linking:true');
-            //newA.attr('class','tabs-title-text');
-            //newA.attr('role','tab');
-            //newA.attr('id','datatab_'+index + '_label');
-            //newA.attr('aria-selected','false');
+           
+            newA.prop('innerHTML', dataObj[index].beach_name);
+            newA.attr('class','list-content');
+            newA.attr('id','data_'+index.toString().padStart(2,0) + '_label');
             newtab.append(newA);
         });
         
-       
-        $.each(dataObj,function(index){
-            
-            var newpanel= $('<div>');
-            newpanel.attr('class','content tabs-panel_header');
-            newpanel.attr('id','panel'+ index);
-            $('#results_tab_contents').append(newpanel);
+        callback(dataObj);
+    };
 
-            var newcol=$('<div>');
-            newcol.attr('class','medium-12 small-12 columns beach_head_block');
-            newpanel.append(newcol);
-
-            var newh = $('<h4>');
-            newh.attr('class','beach_name')
-            newh.prop('innerHTML', dataObj[index].new_name + '');
-            newcol.append(newh);
-
-            var newh = $('<h5>');
-            newh.attr('class','warning_title')
-            newh.prop('innerHTML', 'Weather warnings:' + '');
-            newcol.append(newh);
-
-            var newp = $('<p>');
-            newp.attr('class','warning_text');
-            newp.text('No weather warnings currently in place');
-            newcol.append(newp);
-
-            var newr= $('<div>');
-            newr.attr('class','row_data');
-            newr.attr('id','datarow_'+ index);
-            newcol.append(newr);
-            
-            var newcol=$('<div>');
-            newcol.attr('class','medium-6 small-12 columns results beach_data_block');
-            newr.append(newcol);
-            
-            var newtable = $('<table>');
-            newtable.attr('class','hover striped stack res_table');
-            newtable.attr('id','tbl_l_'+ index);
-            newcol.append(newtable);
-
-            //Setup header for desired number of colums.  Header will not be shown.
-
-            var newhead = $('<thead>');
-            newtable.attr('class','results_table_header');
-            newtable.append(newhead);
-
-            var newtblcol= $('<th>');
-            newtblcol.attr('class','results_table_header_col');
-            newtblcol.attr('id','col1');
-            newhead.append(newtblcol);
-            var newtblcol= $('<th>');
-            newtblcol.attr('class','results_table_header_col');
-            newtblcol.attr('id','col2');
-            newhead.append(newtblcol);
-            var newtblcol= $('<th>');
-            newtblcol.attr('class','results_table_header_col');
-            newtblcol.attr('id','col3');
-            newhead.append(newtblcol);
-            var newtblcol= $('<th>');
-            newtblcol.attr('class','results_table_header_col');
-            newtblcol.attr('id','col4');
-            newhead.append(newtblcol);
-
-            
-            // Setup body
-            var newbody = $('<tbody>');
-            newbody.attr('class','results_table_header');
-            newtable.append(newbody);
-
-
-            //Setup contents of body with the data
-            var newtr=$('<tr>');
-            newtr.attr('class','results_table_row');
-            newbody.append(newtr);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Summary:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML','<p>' + dataObj[index].precis_texts + '</p>');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Temperature:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML','<p>' + dataObj[index].temperatures[1].toFixed(1) + ' °C </p>');
-            newtr.append(newtd);
-
-            var newtr=$('<tr>');
-            newtr.attr('class','results_table_row');
-            newbody.append(newtr);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Swell direction:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-
-            var uniqueData= unique(dataObj[index].swell_direction_texts);
-            var swell_text=getSwellTextSummary(uniqueData);
-                       
-            newtd.prop('innerHTML', '<p>' + swell_text + '</p>');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('UV Index:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML','<p>' + dataObj[index].uv_texts[1] + '</p>');
-            newtr.append(newtd);
-
-            var newtr=$('<tr>');
-            newtr.attr('class','results_table_row');
-            newbody.append(newtr);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Swell size:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML', '<p>' + dataObj[index].swell_heights[1].toFixed(1)  + ' m </p>');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('High tide is at:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML','<p>'+ '</p>');
-            newtr.append(newtd);
-            
-            var newtr=$('<tr>');
-            newtr.attr('class','results_table_row');
-            newbody.append(newtr);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Swell period:');
-            newtr.append(newtd);
-
-            console.log(dataObj[index].swell_periods[1]);
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML', '<p>' + dataObj[index].swell_periods[1].toFixed(1)  + ' secs </p>');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Low tide is at:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML','<p>'+ '</p>');
-            newtr.append(newtd);
-
-            var newtr=$('<tr>');
-            newtr.attr('class','results_table_row');
-            newbody.append(newtr);
-            
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Wind strength');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML', '<p>' + dataObj[index].wind_speeds[1].toFixed(1)  + '</p>');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Sunrise is at:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML','<p>'+dataObj[index].sunrise + '</p>');
-            newtr.append(newtd);
-
-            var newtr=$('<tr>');
-            newtr.attr('class','results_table_row');
-            newbody.append(newtr);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Wind direction:');
-            newtr.append(newtd);
-
-            var uniqueData= unique(dataObj[index].wind_direction_texts);
-            var wind_text=getSwellTextSummary(uniqueData);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML', '<p>' + wind_text  + '</p>');
-            newtr.append(newtd);
-            
-            var newtd=$('<td>');
-            newtd.attr('class','results_rownames');
-            newtd.text('Sunset is at:');
-            newtr.append(newtd);
-
-            var newtd=$('<td>');
-            newtd.attr('class','results_rowdata results_rowdata_p');
-            newtd.prop('innerHTML','<p>'+ dataObj[index].sunset + '</p>');
-            newtr.append(newtd);
-            
-        });
-        elem = new Foundation.Tabs($('#results_tabs'));
-        $('.tabs').foundation();
+    function updateSpotGlobal(spotsList){
+        glSpotsData=spotsList;
     }
 
 
-    function renderData(dataObj){
+    function renderList(dataObj){
         
-        createAllTabs(dataObj);
-
+        createList(dataObj,updateSpotGlobal);
+        hideCarousel();
 
     };
 
-
-
-
-
     $("#search-btn").on("click", function() {
+
+        addGettingDataMsg();
+        hideCarousel();
+
         var wwtimerObj;
         var datareadyObj;
+        var spotsListReadyObj;
+
+        
         
         function checkForData(){
             var recs_received=glData.length;
+            var recs_expected=9;
+            
+
             if (recs_received<1) {
                 return;
             }; 
-            if (recs_received<9) {
-                console.log('Records received: ' + recs_received);
-            } else if (recs_received==9){
+            if (recs_received<recs_expected) {
+                //console.log('Records received: ' + recs_received);
+            } else if (recs_received===9){
                 gldataReady=true;
-                console.log('Have All Data');
+                //console.log('Have All Data');
                 //console.log(glData);
                 clearInterval(wwtimerObj);
             }
         };
         
-        function prepareData(callback){
-            var filteredData=[];
+        function prepareData(){
+            
             if (gldataReady===false){
                 return;
             };
             clearInterval(datareadyObj);
-            var spotsList=getSurfSpotList(glData);
-            console.log({spotsList});
-            //filteredData=getFilteredList(okIDs,glData);
-            renderData(spotsList);
 
-            console.log('the tabs should be created!');
+            var spotsList=getSurfSpotList(glData);
+            
+            renderList(spotsList);
+            
             return spotsList;  //check if beach ww_id is in the data structure
         };
         
+
+        function processWarnings(data){
+          
+            //console.log({data});
+            var filteredWarnings=filterWarnings(data);
+            
+            haveWarnings=true;
+            glWarningsData=filteredWarnings;
+            return filteredWarnings;
+        }
 
         function getFilteredList (okIDs=[],dataObj){
             var filteredList=[];
@@ -629,20 +768,31 @@ $(document).ready(function() {
             return filteredList;
         }
 
-
-        
+        function checkSpotsGlobal(){
+            if (glSpotsData.length>0) {
+                haveSpots=true;
+                clearInterval(spotsListReadyObj);    
+            
+            };
+        };
+        var map=$('#map_canvas');
+        if (map.length) map.empty();
         //Gets the data from the WW API and puts it into the global variable
         getDataFromWW(ww_ids,moment(),glwhichDay,glStartHr,updateGlobal);
-        var warnings=getWarningsData(gotWarnings); 
+        glWarningsData= getWarningsData(processWarnings); 
         
         //Checks whether any data has been received in the global variable
         wwtimerObj=setInterval(function () {
-            checkForData(renderData)
+            checkForData()
         },200);
 
         //Checks whether all the data is ready for assessment
         datareadyObj=setInterval(function(){
             prepareData()
+        },200);
+
+        spotsListReadyObj=setInterval(function(){
+            checkSpotsGlobal();
         },200);
     });
 
@@ -673,18 +823,30 @@ $(document).ready(function() {
     });
 
 
-//$('#results_tabs').foundation('selectTab',elem,historyHandled);
+    $('#results_list').on('click',function(event){
+        //console.log(event.target.id);
+        var theindex=parseInt(event.target.id.substring(5,7));
+        //console.log(theindex);
+        var warnings=[];
 
-
-   /*  $('#results_tab').foundation('selectTab', function (event, tab) {
-        console.log('selected a tab');
+        var whichBeach= glSpotsData[theindex].ww_id;
+        //console.log(glSpotsData[theindex]);
+        if (glWarningsData!== undefined){ 
+            if(whichBeach===14555){
+                warnings=glWarningsData.LancelinWarnings;
+                
+            } else {
+                warnings=glWarningsData.PerthWarnings;
+            }
+            
+        };
+        var whichdata=glSpotsData[theindex];
+        //console.log(haveSpots);
+        if (haveSpots===true) {
+            renderSpotData(whichdata,theindex,warnings);
+        };
         
-    }); */
-
-    $(document).on('change.zf.tabs', "#results_tab", function(){
-        console.log('change done');
-    }); 
-      
+    });
 
 
     $('#ability').on('change',function(event){

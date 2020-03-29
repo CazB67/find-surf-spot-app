@@ -22,10 +22,7 @@ function makewwWarningsURL(){
     return 'https://cors-anywhere.herokuapp.com/https://api.willyweather.com.au/v2/ZWZjODA2NGIyMGQxZThjYmZmNzE3Mz/states/7/warnings.json'
 }
 
-function gotWarnings(data){
-    console.log('Callback - got warnings.');
-    console.log({data})
-}
+
 
 function getWarningsData(callback){
     var queryURL=makewwWarningsURL();
@@ -34,14 +31,12 @@ function getWarningsData(callback){
         url: queryURL,
         method: 'GET',
         success: function(response){
-            console.log('success');
-            console.log(response);
             data = filterWarnings(response);
             callback(data);
         },
         error: function(){}
     }).done(function(response){
-        console.log('Warnings all done'); 
+    
     });
 };
 
@@ -58,10 +53,10 @@ function filterWarnings(dataObj){
         };
         var warningText= dataObj[index].content.html;
         if(warningText.indexOf('Lancelin')>=0) {
-            console.log ('found relevant Lancelin warnings');
+            //console.log ('found relevant Lancelin warnings');
             LancelinWarnings=LancelinWarnings.push(warningText) ;
         } else if (warningText.indexOf('Perth')>=0 ){
-            console.log ('found relevant Perth warnings');
+            //console.log ('found relevant Perth warnings');
             PerthWarnings=PerthWarnings.push(warningText);
         }
     });
@@ -69,9 +64,7 @@ function filterWarnings(dataObj){
     return data;
 };
 
-function checkGradeConditions(){
-    //TODO
-};
+
 
 function makewwURL(location='',start_date=Date()){
     if (location!== ''){
@@ -82,7 +75,7 @@ function makewwURL(location='',start_date=Date()){
         var middle_data = '/locations/';
 
         //var suffix_id = '&limit=1';
-        var suffix_data = '/weather.json?forecasts=swell,wind,precis,temperature,sunrisesunset,uv&days=2&startDate=';
+        var suffix_data = '/weather.json?forecasts=swell,wind,precis,temperature,sunrisesunset,tides,uv&days=2&startDate=';
         var datestring = moment(start_date).format('YYYY-MM-DD');
 
         var queryURL = www_addr + api_key + middle_data + searchlocn + suffix_data + datestring;
@@ -125,7 +118,7 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
         id_list=getUniqueIDs(beacharray);
     };
 
-    console.log('Sites:' + id_list.length);
+    //console.log('Sites:' + id_list.length);
     for(var index=0; index<id_list.length; index++) {
         var locn_id=id_list[index];
         //var whichDate=moment(start_date).format('YYYY-MM-DD');
@@ -160,11 +153,10 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
             method: "GET",
             error: function(response){
                 //errors.push(queryURL);
-                console.log(queryURL);
+                
                 ++done;
             },
             success: function(response){
-                console.log(response);
                 data_selection={
                     'ww_id':response.location.id,
                     'ww_name': response.location.name,
@@ -219,20 +211,22 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
                         response.forecasts.uv.days[whichday].entries[uv_time+1].scale,
                         response.forecasts.uv.days[whichday].entries[uv_time+2].scale
                     ],
+                    'tides':[
+                        response.forecasts.tides.days[whichday].entries
+                    ],
                     'sunrise_firstlight': response.forecasts.sunrisesunset.days[whichday].entries[0].firstLightDateTime,
                     'sunrise': response.forecasts.sunrisesunset.days[whichday].entries[0].riseDateTime,
                     'sunset_lastlight' : response.forecasts.sunrisesunset.days[whichday].entries[0].lastLightDateTime,
                     'sunset': response.forecasts.sunrisesunset.days[whichday].entries[0].setDateTime
                 };
-                
+              
             data.push(data_selection);
             ++done;
-            //console.log ({done});
+            
             }
         }).done(function(response){
             gotData=true;
             if (done==id_list.length-1){
-                //console.log("do callback now");
                 callback(data);
             }                              
         });

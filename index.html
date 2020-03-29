@@ -75,7 +75,7 @@
               <label>Ability
                 <select class="input" id="ability">
                   <option value="beginner">Beginner</option>
-                  <option value="medium">Medium</option>
+                  <option value="intermediate">Intermediate</option>
                   <option value="advanced">Advanced</option>
                 </select>
               </label>
@@ -101,10 +101,20 @@
       <!-- End of form and input information on left hand side -->
 
     <!-- Start of results info on right hand side -->
-    <div class="medium-8 columns " id='tab_object'>
-      <ul class='tabs vertical data-tabs' id='results_tabs' data-tab></ul> 
+    <div class="medium-8 columns " id='results_object'>
+      <div class='medium-3 columns' id='results_list_col'>
+        <ul class='list' id='results_list' ></ul> 
+        
+      </div>
       
-      <div class="tabs-content" data-tabs-content id="results_tab_contents"> </div>
+      <div class='medium-9 columns' id='results_col'>
+        <div class="results_content" id="results_contents"> </div>
+        <div class='google_map' id='map_canvas'>
+
+        </div>
+      </div>
+      
+      
       
 
       
@@ -112,7 +122,7 @@
     <!-- End of results info on right hand side -->
 
     <!-- Start of Orbit -->
-    <div class="medium-7 columns">
+    <div class="medium-7 columns"  id='picture_carousel'>
       <div class = "orbit" role = "region" data-orbit data-use-m-u-i = "false">
         <ul class = "orbit-container">
            <button class = "orbit-previous" aria-label = "previous"><span class = "show-for-sr">Previous Slide</span>◀</button>
@@ -217,6 +227,7 @@
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.2/js/plugins/foundation.util.motion.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src = "javascripts/api_scripts.js"></script>
+    <script src = "javascripts/test_data.js"></script>
     <script src = "javascripts/scripts.js"></script>
 
   </body>

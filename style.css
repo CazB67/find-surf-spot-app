@@ -61,14 +61,37 @@ p {
   float:left;
   margin-left: 0px;
   padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
 
 }
+.beach_head_block{
+  margin:0px;
+  padding:0px;
+}
 
-.tabs-title{
+#results_col{
+  padding: 0px;
+  margin: 0px;
+}
+#results_list{
+  list-style-type: none;
+  margin-left: 0px;
+}
+
+#results_list_col{
+  padding-left: 0px;
+}
+#list_item, #list-content{
   list-style-type: none;
   border: 1pt solid lightgray;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+#results_table_row{
+  display: table-cell;
+  vertical-align: top;
+  float: none !important
 }
 
 .tabs-content {
@@ -99,8 +122,11 @@ thead {
 
 .results_rownames{
   font-weight: 600;
-}
 
+}
+.results_rowdata_p>p{
+  margin-bottom:0px!important;
+}
   /* Horizontally centres modal*/
   @media print, screen and (min-width: 40em) {
     #exampleModal1{
