@@ -49,6 +49,84 @@ p {
       width: 100%;
   }
 
+.beach_name{
+  padding-bottom: 1.5rem;
+}
+
+.warning_title{
+  padding-bottom: 1.5rem;
+}
+
+.beach_data_block{
+  float:left;
+  margin-left: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+
+}
+.beach_head_block{
+  margin:0px;
+  padding:0px;
+}
+
+#results_col{
+  padding: 0px;
+  margin: 0px;
+}
+#results_list{
+  list-style-type: none;
+  margin-left: 0px;
+}
+
+#results_list_col{
+  padding-left: 0px;
+}
+#list_item, #list-content{
+  list-style-type: none;
+  border: 1pt solid lightgray;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+#results_table_row{
+  display: table-cell;
+  vertical-align: top;
+  float: none !important
+}
+
+.tabs-content {
+  list-style-type: none;
+  margin-left: 0px;
+    
+
+}
+.tabs{
+  border: none;
+}
+
+#tab-object{
+  border: none;
+}
+
+.tabs-title>a {
+  padding: 0.8rem;
+}
+
+thead {
+  visibility: hidden
+}
+  .res_table, .results{ 
+    position:relative;
+    float:left;
+  }
+
+.results_rownames{
+  font-weight: 600;
+
+}
+.results_rowdata_p>p{
+  margin-bottom:0px!important;
+}
   /* Horizontally centres modal*/
   @media print, screen and (min-width: 40em) {
     #exampleModal1{

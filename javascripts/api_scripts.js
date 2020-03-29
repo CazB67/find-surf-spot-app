@@ -1,119 +1,6 @@
 //$(document).ready(function(){
 
-    const ww_ids = [{
-        location: 'Trigg Beach',
-        ww_locn: 'Trigg+Beach',
-        ww_id: 18919,
-        lat: -31.877,
-        lng: 115.751,
-        postcode: '6029',
-    },
-    {
-        location: 'Scarborough Beach',
-        ww_locn: 'Scarborough+Beach',
-        ww_id: 19555,
-        lat: -31.894,
-        lng: 115.754,
-        postcode: '6019',
-    },
-    {   
-        location: 'Stricklands Bay',
-        ww_locn: 'Rottnest+Island',
-        ww_id: 14468,
-        lat: -31.995,
-        lng: 115.54,
-        postcode: '6161'
-    },/* 
-    {
-        location: 'Mandurah',
-        ww_locn: 'Mandurah',
-        ww_id: 14422,
-        lat: -32.533,
-        lng: 115.733,
-        postcode: '6210'
-    }, */
-    {
-        location: 'Lancelin',
-        ww_locn: 'Lancelin',
-        ww_id: 14555,
-        lat: -31.021,
-        lng: 115.332,
-        postcode: '6044'
-    },/* 
-    {
-        location: 'Alkimos',
-        ww_locn: 'Alkimos',
-        ww_id: 14507,
-        lat: -31.609,
-        lng: 115.691,
-        postcode: '6038'
-    }, */
-    {
-        location: 'Secret Harbour',
-        ww_locn: 'Secret+Harbour',
-        ww_id: 14472,
-        lat: -32.402,
-        lng: 115.749,
-        postcode: '6173'
-    },
-    {
-        location: 'Mettams Pool',
-        ww_locn: 'North+Beach',
-        ww_id: 15960,
-        lat: -31.861,
-        lng: 115.753,
-        postcode: '6020'
-    },
-    {
-        location: 'Cottesloe Mainbreak',
-        ww_locn: 'Cottesloe+Beach',
-        ww_id: 18824,
-        lat: -31.996,
-        lng: 115.751,
-        postcode: '6011',
-    },
     
-    {
-        location: 'Cottesloe Reef',
-        ww_locn: 'Cottesloe+Beach',
-        ww_id: 18824,
-        lat: -31.996,
-        lng: 115.751,
-        postcode: '6011',
-    },
-    {
-        location: 'Sand Tracks Beach',
-        ww_locn: 'Leighton+Beach',
-        ww_id: 18920,
-        lat: -32.03,
-        lng: 115.747,
-        postcode: '6159'
-    },
-    {
-        location: 'Leighton Beach',
-        ww_locn: 'Leighton+Beach',
-        ww_id: 18920,
-        lat: -32.03,
-        lng: 115.747,
-        postcode: '6159'
-    },
-    {
-        location: 'Cables Artificial Reef',
-        ww_locn: 'Mosman+Beach',
-        ww_id: 18824,
-        lat: -31.996,
-        lng: 115.751,
-        postcode: '6011',
-    },
-    {
-        location: 'Hillarys Marina',
-        ww_locn: 'Hillarys Marina',
-        ww_id: 19546,
-        lat: -31.823,
-        lng:  115.733,
-        postcode: '6025'
-    }
-];
 
 function getUniqueIDs(beacharray){
     var ids=[beacharray[0].ww_id];
@@ -135,10 +22,7 @@ function makewwWarningsURL(){
     return 'https://cors-anywhere.herokuapp.com/https://api.willyweather.com.au/v2/ZWZjODA2NGIyMGQxZThjYmZmNzE3Mz/states/7/warnings.json'
 }
 
-function gotWarnings(data){
-    console.log('Callback - got warnings.');
-    console.log({data})
-}
+
 
 function getWarningsData(callback){
     var queryURL=makewwWarningsURL();
@@ -147,14 +31,12 @@ function getWarningsData(callback){
         url: queryURL,
         method: 'GET',
         success: function(response){
-            console.log('success');
-            console.log(response);
             data = filterWarnings(response);
             callback(data);
         },
         error: function(){}
     }).done(function(response){
-        console.log('Warnings all done'); 
+    
     });
 };
 
@@ -171,16 +53,18 @@ function filterWarnings(dataObj){
         };
         var warningText= dataObj[index].content.html;
         if(warningText.indexOf('Lancelin')>=0) {
-            console.log ('found relevant Lancelin warnings');
+            //console.log ('found relevant Lancelin warnings');
             LancelinWarnings=LancelinWarnings.push(warningText) ;
         } else if (warningText.indexOf('Perth')>=0 ){
-            console.log ('found relevant Perth warnings');
+            //console.log ('found relevant Perth warnings');
             PerthWarnings=PerthWarnings.push(warningText);
         }
     });
     var data={LancelinWarnings,PerthWarnings};
     return data;
 };
+
+
 
 function makewwURL(location='',start_date=Date()){
     if (location!== ''){
@@ -191,7 +75,7 @@ function makewwURL(location='',start_date=Date()){
         var middle_data = '/locations/';
 
         //var suffix_id = '&limit=1';
-        var suffix_data = '/weather.json?forecasts=swell,wind,precis,temperature,sunrisesunset,uv&days=2&startDate=';
+        var suffix_data = '/weather.json?forecasts=swell,wind,precis,temperature,sunrisesunset,tides,uv&days=2&startDate=';
         var datestring = moment(start_date).format('YYYY-MM-DD');
 
         var queryURL = www_addr + api_key + middle_data + searchlocn + suffix_data + datestring;
@@ -234,7 +118,7 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
         id_list=getUniqueIDs(beacharray);
     };
 
-    console.log('Sites:' + id_list.length);
+    //console.log('Sites:' + id_list.length);
     for(var index=0; index<id_list.length; index++) {
         var locn_id=id_list[index];
         //var whichDate=moment(start_date).format('YYYY-MM-DD');
@@ -269,11 +153,10 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
             method: "GET",
             error: function(response){
                 //errors.push(queryURL);
-                console.log(queryURL);
+                
                 ++done;
             },
             success: function(response){
-                console.log(response);
                 data_selection={
                     'ww_id':response.location.id,
                     'ww_name': response.location.name,
@@ -328,20 +211,22 @@ function getDataFromWW(beacharray=[], start_date,whichdayindex,starttime,callbac
                         response.forecasts.uv.days[whichday].entries[uv_time+1].scale,
                         response.forecasts.uv.days[whichday].entries[uv_time+2].scale
                     ],
+                    'tides':[
+                        response.forecasts.tides.days[whichday].entries
+                    ],
                     'sunrise_firstlight': response.forecasts.sunrisesunset.days[whichday].entries[0].firstLightDateTime,
                     'sunrise': response.forecasts.sunrisesunset.days[whichday].entries[0].riseDateTime,
                     'sunset_lastlight' : response.forecasts.sunrisesunset.days[whichday].entries[0].lastLightDateTime,
                     'sunset': response.forecasts.sunrisesunset.days[whichday].entries[0].setDateTime
                 };
-                
+              
             data.push(data_selection);
             ++done;
-            //console.log ({done});
+            
             }
         }).done(function(response){
             gotData=true;
             if (done==id_list.length-1){
-                //console.log("do callback now");
                 callback(data);
             }                              
         });
