@@ -1,119 +1,6 @@
 //$(document).ready(function(){
 
-    const ww_ids = [{
-        location: 'Trigg Beach',
-        ww_locn: 'Trigg+Beach',
-        ww_id: 18919,
-        lat: -31.877,
-        lng: 115.751,
-        postcode: '6029',
-    },
-    {
-        location: 'Scarborough Beach',
-        ww_locn: 'Scarborough+Beach',
-        ww_id: 19555,
-        lat: -31.894,
-        lng: 115.754,
-        postcode: '6019',
-    },
-    {   
-        location: 'Stricklands Bay',
-        ww_locn: 'Rottnest+Island',
-        ww_id: 14468,
-        lat: -31.995,
-        lng: 115.54,
-        postcode: '6161'
-    },/* 
-    {
-        location: 'Mandurah',
-        ww_locn: 'Mandurah',
-        ww_id: 14422,
-        lat: -32.533,
-        lng: 115.733,
-        postcode: '6210'
-    }, */
-    {
-        location: 'Lancelin',
-        ww_locn: 'Lancelin',
-        ww_id: 14555,
-        lat: -31.021,
-        lng: 115.332,
-        postcode: '6044'
-    },/* 
-    {
-        location: 'Alkimos',
-        ww_locn: 'Alkimos',
-        ww_id: 14507,
-        lat: -31.609,
-        lng: 115.691,
-        postcode: '6038'
-    }, */
-    {
-        location: 'Secret Harbour',
-        ww_locn: 'Secret+Harbour',
-        ww_id: 14472,
-        lat: -32.402,
-        lng: 115.749,
-        postcode: '6173'
-    },
-    {
-        location: 'Mettams Pool',
-        ww_locn: 'North+Beach',
-        ww_id: 15960,
-        lat: -31.861,
-        lng: 115.753,
-        postcode: '6020'
-    },
-    {
-        location: 'Cottesloe Mainbreak',
-        ww_locn: 'Cottesloe+Beach',
-        ww_id: 18824,
-        lat: -31.996,
-        lng: 115.751,
-        postcode: '6011',
-    },
     
-    {
-        location: 'Cottesloe Reef',
-        ww_locn: 'Cottesloe+Beach',
-        ww_id: 18824,
-        lat: -31.996,
-        lng: 115.751,
-        postcode: '6011',
-    },
-    {
-        location: 'Sand Tracks Beach',
-        ww_locn: 'Leighton+Beach',
-        ww_id: 18920,
-        lat: -32.03,
-        lng: 115.747,
-        postcode: '6159'
-    },
-    {
-        location: 'Leighton Beach',
-        ww_locn: 'Leighton+Beach',
-        ww_id: 18920,
-        lat: -32.03,
-        lng: 115.747,
-        postcode: '6159'
-    },
-    {
-        location: 'Cables Artificial Reef',
-        ww_locn: 'Mosman+Beach',
-        ww_id: 18824,
-        lat: -31.996,
-        lng: 115.751,
-        postcode: '6011',
-    },
-    {
-        location: 'Hillarys Marina',
-        ww_locn: 'Hillarys Marina',
-        ww_id: 19546,
-        lat: -31.823,
-        lng:  115.733,
-        postcode: '6025'
-    }
-];
 
 function getUniqueIDs(beacharray){
     var ids=[beacharray[0].ww_id];
@@ -180,6 +67,10 @@ function filterWarnings(dataObj){
     });
     var data={LancelinWarnings,PerthWarnings};
     return data;
+};
+
+function checkGradeConditions(){
+    //TODO
 };
 
 function makewwURL(location='',start_date=Date()){
