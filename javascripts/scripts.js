@@ -308,31 +308,14 @@ const dummyLocations = [
 
         return spotsList;
     };
-    
-    /* function orderList(unorderedObjectArray=[]){
-        //this isn't working yet...
-
-        var newlist=[{}];
-        newlist= Object.assign({}, unorderedObjectArray);
-        console.log({newlist});
-        
-       newlist.sort(function(a,b){
-            return a.beach_name - b.beach_name
-        });
-        return newlist;
-    }; */
 
     function hideCarousel(){
 
         $('#picture_carousel').addClass('hide');
     };
 
-    function showCarousel(){
-       $('#bottom').append("orbit");
-    };
-
     function addGettingDataMsg(msgheader='Looking for your surf spot recommendations now', themsg="This shouldn't take too long. Thanks for waiting.") {
-
+       
         var newpanel=$('#results_contents');
 
         var newmsghdr = $('<h5>');
