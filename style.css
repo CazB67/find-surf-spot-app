@@ -147,3 +147,7 @@ thead {
     width: 100%;
     background-image: url("./images/vladimir-kudinov-RKiMg1bwsMY-unsplash.jpg");
 }
+
+.photo-credit {
+  margin-right: 5px;
+}

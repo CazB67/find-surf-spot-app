@@ -318,7 +318,7 @@ const dummyLocations = [
     };
 
     function showCarousel(){
-        $('#picture_carousel').css('visibility','visible');
+       $('#bottom').append("orbit");
     };
 
     function addGettingDataMsg(msgheader='Looking for your surf spot recommendations now', themsg="This shouldn't take too long. Thanks for waiting.") {
@@ -689,6 +689,7 @@ const dummyLocations = [
         });
         
         callback(dataObj);
+
     };
 
     function updateSpotGlobal(spotsList){
