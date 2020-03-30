@@ -54,8 +54,8 @@ THEN I am presented with the following information about that spot:
 ## Installation
 
 ### APIs used 
-- Bureau of Meterology
-- Willyweather API 
+- Willy Weather Warnings API
+- Willy Weather Forecasts API 
 - Google Maps Embed API
 
 ### Technologies used 
@@ -107,6 +107,7 @@ Select ability and when you want to surf from the drop down lists and click sear
 ## Directions for Future Development
 - Expand to include other regions of Western Australia
 - Expand to view forecasts for a greater time period
+- Improve the quality of predictions by increasing the number of data points to make predictions.
 
 ## Credits
 * Team at UWA Coding Bootcamp
