@@ -314,7 +314,7 @@ const dummyLocations = [
 
     function hideCarousel(){
 
-        $('#picture_carousel').css('visibility','hidden');
+        $('#picture_carousel').addClass('hide');
     };
 
     function showCarousel(){
