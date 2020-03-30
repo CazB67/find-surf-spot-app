@@ -84,7 +84,7 @@ THEN I am presented with the following information about that spot:
 ### Challenges
 - Willy Weather API CORS issues
 - Accurately using muliple weather variables to predict where the best surf will be 
-- Using modals to display API data 
+- Removing double ups from beaches list 
 
 ### Successes
 - Developing a viable and useful product
