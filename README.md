@@ -100,7 +100,7 @@ This has been deployed to the URLs
 
 When you click on the link of the web application you are directed to the webpage of the deployed application. The following image shows how the page appears.
 
-![Find Surf Spot Application](webpage.png)
+![Find Surf Spot Application](webpage.PNG)
 
 Select ability and when you want to surf from the drop down lists and click search. A list of suitable beaches appears. Click on a beach and weather conditions and a map of the beach appear. Click on desired beach or make another search if desired.
 
