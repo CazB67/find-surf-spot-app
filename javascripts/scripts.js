@@ -39,15 +39,15 @@ $(document).ready(function() {
         lat: -31.021,
         lng: 115.332,
         postcode: '6044'
-    },/* 
+    }, 
     {
-        location: 'Alkimos',
-        ww_locn: 'Alkimos',
-        ww_id: 14507,
-        lat: -31.609,
-        lng: 115.691,
-        postcode: '6038'
-    }, */
+        location: 'Alkimos Beach',
+        ww_locn: 'Two+Rocks',
+        ww_id: 14591,
+        lat: -31.501,
+        lng: 115.588,
+        postcode: '6037'
+    },
     {
         location: 'Secret Harbour',
         ww_locn: 'Secret+Harbour',
@@ -287,24 +287,6 @@ const dummyLocations = [
                                     },false);
                         
                     for (var thisIndex=0; thisIndex<options.length; thisIndex++) {
-                        // You have an issue with Javascript and copying objects. 
-                        /*
-                        This makes sense, and 'should' be right. However JS is simply referencing
-                        the value in the dataRecordToInclude variable / object. 
-                        spotsList.unshift(dataRecordToInclude);
-                        spotsList[0].beach_name=options[thisIndex].location;
-                        */
-
-                        // The code below takes a copy of an object RATHER than a reference to the value we changed.
-                        // I ound the following online (as I couldn't find an appropriate analogy) 
-                        /*
-                        Since I was tired of the easy IT examples which all revolved around sharing files and documents, I started using the following analogies to explain pass by value and by reference.
-                        My cat ("Mr Doorknob") sometimes wanders off to my neighbour. They call him "Cirmi", but of course he is still the same cat. If they feed him, he comes home fat and satisfied, if their dog licks him, he comes home covered in saliva.
-                        This is a bit like passing a variable by reference: they might give him a different name, but it is the same cat. Whatever is done to the passed cat in the neighbour's garden will be visible on the cat when he finally comes home. (I actually like this because it helps them understand the "different name thing".)
-                        As for passing by value, my neighbours really liked my new sunshade. They asked me where I got it from, and they bought one themselves. It looked identical in the beginning, but theirs got pooped on by a bird. This, obviously, didn't affect mine, it is still as shiny and clean as it was.
-                        https://cseducators.stackexchange.com/questions/583/what-is-a-good-analogy-for-pass-by-value-vs-by-reference
-                        */
-
                         var dataRecordToIncludeX= Object.assign({}, dataObj[index]);
                         dataRecordToIncludeX.beach_name="";                        
                         spotsList.unshift(dataRecordToIncludeX);
@@ -319,13 +301,26 @@ const dummyLocations = [
             }
             
         })       
-  
-
+        
+        spotsList= spotsList.sort(function(a,b){
+            return a.beach_name - b.beach_name
+        });
 
         return spotsList;
-    }
+    };
     
-    
+    /* function orderList(unorderedObjectArray=[]){
+        //this isn't working yet...
+
+        var newlist=[{}];
+        newlist= Object.assign({}, unorderedObjectArray);
+        console.log({newlist});
+        
+       newlist.sort(function(a,b){
+            return a.beach_name - b.beach_name
+        });
+        return newlist;
+    }; */
 
     function hideCarousel(){
 
@@ -619,7 +614,12 @@ const dummyLocations = [
         newtr.append(newtd);
         
         //console.log(dataRecord.ww_name);
-        addMap(dataRecord.ww_name);
+        try {
+            addMap(dataRecord.ww_name);
+        } catch (error) {
+            showModal('Sorry','', "We can't load the map for you right now." )
+        }
+        
        
     };    
 
@@ -630,6 +630,7 @@ const dummyLocations = [
         if (map.length) map.empty();
 
         //console.log(location);
+        if(location==='Beginners Beach' || location === 'Intermediate Beach' || location === 'Advanced Beach') {location='Cottesloe Beach'};
         location=location.replace(' ','+');
         var newiframe= $('<iframe>');
         newiframe.attr('class','surfspotmap');
@@ -639,6 +640,8 @@ const dummyLocations = [
         newiframe.prop('style','border:1');
         newiframe.attr('src','https://www.google.com/maps/embed/v1/search?key=AIzaSyBq3Iasy2twY_1xhq32EzbMbaaj9EK1AJk&q='+ location);
         map.append(newiframe);
+
+
     };
 
     function formatTime(timestring,formatWanted='LT'){
@@ -652,7 +655,6 @@ const dummyLocations = [
         });
         return result;
     };
-
 
     function getSwellTextSummary (swell_texts=[]){
         
@@ -720,7 +722,8 @@ const dummyLocations = [
     };
 
     $("#search-btn").on("click", function() {
-
+        //showModal('Test', 'Nothing much','just seeing if this works...');
+        
         addGettingDataMsg();
         hideCarousel();
 
@@ -740,7 +743,7 @@ const dummyLocations = [
             }; 
             if (recs_received<recs_expected) {
                 //console.log('Records received: ' + recs_received);
-            } else if (recs_received===9){
+            } else if (recs_received===10){
                 gldataReady=true;
                 //console.log('Have All Data');
                 //console.log(glData);
@@ -812,11 +815,15 @@ const dummyLocations = [
         },200);
     });
 
-    function showModal(){
-        // var x = new Foundation.Reveal($("#exampleModal1"));
-        // x.open();
-        //https://stackoverflow.com/questions/33855505/zurb-foundation-6-reveal-doesnt-work
-        //$('#exampleModal1').foundation('reveal', 'open');
+    function showModal(titleText='Oops',subtitle='', msgText='something went wrong'){
+        
+        
+        $('#modal-title').prop('innerHTML',titleText);
+        $('#modal-subtitle').prop('innerHTML','');
+        $('#modal-body-text').prop('innerHTML',msgText);
+        var x = new Foundation.Reveal($("#exampleModal1"));
+        x.open();
+        
     }
     
     $('#when').on('change',function(event){
@@ -840,7 +847,10 @@ const dummyLocations = [
 
 
     $('#results_list').on('click',function(event){
+
+        
         //console.log(event.target.id);
+        
         var theindex=parseInt(event.target.id.substring(5,7));
         //console.log(theindex);
         var warnings=[];
