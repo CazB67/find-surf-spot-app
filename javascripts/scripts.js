@@ -274,39 +274,54 @@ const dummyLocations = [
 
         var okspots=getSurfabilityArray(dataObj,glAbility);  //array of true/false values
         
-       
         var spotsList=[];
-
-        console.log ({beachdata});
 
         $.each(okspots,function(index){
             if (okspots[index]===true){            // data to be included 
                 var dataRecordToInclude= dataObj[index];
-                dataRecordToInclude.beach_name='';
-               // console.log({dataRecordToInclude});
+                dataRecordToInclude.beach_name="";
                 var theWWid=dataRecordToInclude.ww_id;  //get the data corresponding to the true/false element in okspots
-                
                 if(theWWid !==0){
                     var options = $.grep(beachdata,function(element,k){
                                         return element.ww_id===theWWid
                                     },false);
-                   // console.log({options})
+                        
                     for (var thisIndex=0; thisIndex<options.length; thisIndex++) {
-                        console.log(options[thisIndex].location);
+                        // You have an issue with Javascript and copying objects. 
+                        /*
+                        This makes sense, and 'should' be right. However JS is simply referencing
+                        the value in the dataRecordToInclude variable / object. 
                         spotsList.unshift(dataRecordToInclude);
                         spotsList[0].beach_name=options[thisIndex].location;
-                        console.log(spotsList);
+                        */
+
+                        // The code below takes a copy of an object RATHER than a reference to the value we changed.
+                        // I ound the following online (as I couldn't find an appropriate analogy) 
+                        /*
+                        Since I was tired of the easy IT examples which all revolved around sharing files and documents, I started using the following analogies to explain pass by value and by reference.
+                        My cat ("Mr Doorknob") sometimes wanders off to my neighbour. They call him "Cirmi", but of course he is still the same cat. If they feed him, he comes home fat and satisfied, if their dog licks him, he comes home covered in saliva.
+                        This is a bit like passing a variable by reference: they might give him a different name, but it is the same cat. Whatever is done to the passed cat in the neighbour's garden will be visible on the cat when he finally comes home. (I actually like this because it helps them understand the "different name thing".)
+                        As for passing by value, my neighbours really liked my new sunshade. They asked me where I got it from, and they bought one themselves. It looked identical in the beginning, but theirs got pooped on by a bird. This, obviously, didn't affect mine, it is still as shiny and clean as it was.
+                        https://cseducators.stackexchange.com/questions/583/what-is-a-good-analogy-for-pass-by-value-vs-by-reference
+                        */
+
+                        var dataRecordToIncludeX= Object.assign({}, dataObj[index]);
+                        dataRecordToIncludeX.beach_name="";                        
+                        spotsList.unshift(dataRecordToIncludeX);
+                        spotsList[0].beach_name=options[thisIndex].location;
                     };
+                    
                 } else { // dummydata with ww_id===0
-                     //console.log({dataRecordToInclude});
                     spotsList.unshift(dataRecordToInclude);
                     spotsList[0].beach_name=spotsList[0].ww_name;
                 };
-    
+   
             }
             
-        })
-        console.log({spotsList});
+        })       
+  
+
+
         return spotsList;
     }
     
