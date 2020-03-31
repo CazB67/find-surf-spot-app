@@ -300,8 +300,9 @@ const dummyLocations = [
    
             }
             
-        })       
-        
+        }) 
+        // Alphabetised list of beaches.      
+        spotsList.sort((a,b) => a.beach_name.localeCompare(b.beach_name));
         spotsList= spotsList.sort(function(a,b){
             return a.beach_name - b.beach_name
         });
