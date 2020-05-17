@@ -1,9 +1,8 @@
 # Find Surf Spot
-Project 1
+A web application that uses Willy Weather API to recommend the best surf sports in the Perth metropolitan area. It uses Foundation CSS Framework and JQuery.
 
 ## Description
-
-Forecast Websites are difficult to interpret and read. It is difficult to know where the best place to surf will be based on the conditions and a person's surfing ability. Thus a web application that uses Willy Weather API to recommend best surf sports in the Perth metropolitan area has been developed.
+Forecast Websites are difficult to interpret and read. It is difficult to know where the best place to surf will be, based on the conditions and a person's surfing ability. Thus a web application that uses Willy Weather API to recommend best surf sports in the Perth metropolitan area has been developed.
 
 ## Table of Contents
 
